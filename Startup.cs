@@ -39,6 +39,7 @@ namespace AppMinhaBahia
                     config.ExpireTimeSpan = TimeSpan.FromHours(1);
                 });
             services.AddScoped<UsuarioRepositorio>();
+            services.AddScoped<CidadeRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

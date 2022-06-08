@@ -6,17 +6,17 @@ namespace AppMinhaBahia.Controllers
 {
     public class CidadeController : Controller
     {
-        private readonly AppMinhaBahiaContext _context;
+        private readonly CidadeRepositorio _repositorio;
 
-        public CidadeController(AppMinhaBahiaContext context)
+        public CidadeController(CidadeRepositorio repositorio)
         {
-            _context = context;
+            _repositorio = repositorio;
         }
 
         [HttpGet]
         public JsonResult GetCidades()
         {
-            return Json(_context.Cidades.ToList());
+            return Json(_repositorio.ListaDeCidades());
         }
     }
 }

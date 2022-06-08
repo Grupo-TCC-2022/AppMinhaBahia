@@ -27,10 +27,9 @@
                                         <span asp-validation-for="CPF" class="text-danger"></span>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        @*
-                                        <input asp-for="NomeCidade" class="form-control" placeholder="Cidade" />*@
-                                        <label asp-for="Cidade"></label>
-                                        <span asp-validation-for="Cidade" class="text-danger"></span>
+                                        <input id="NomeCidadeAutoCompletar" name="NomeCidade" class="form-control" placeholder="Cidade" />
+                                        <label asp-for="NomeCidade"></label>
+                                        <span asp-validation-for="NomeCidade" class="text-danger"></span>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input asp-for="Senha" class="form-control" placeholder="Senha" />

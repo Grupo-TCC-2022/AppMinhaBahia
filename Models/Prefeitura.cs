@@ -115,7 +115,7 @@ namespace AppMinhaBahia.Models
                     requisicao.Setor.Funcionarios.Add(new Funcionario() {
                         CPF = random.Next().ToString(),
                         NomeCompleto = random.Next().ToString(),
-                        Cidade = this.Cidade
+                        NomeCidade = this.NomeCidade
                     });
                 }
                 situacao.Add("status", "sucesso");

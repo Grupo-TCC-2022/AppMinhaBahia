@@ -6,11 +6,16 @@
 $(document).ready(function () {
     $(function () {
         $.ajax({
-            url: 'todos_usuarios'
+            url: '/Cidade/GetCidades'
         }).done(function (data) {
-            $('#apelido_autocomplete').autocomplete({
-                source: data,
-                minLenght: 2
+            listaNomeCidade = [];
+            for (var i = 0, len = data.length; i < len; i++){
+                listaNomeCidade.push(data[i].nome);
+            }
+            console.log(listaNomeCidade);
+            $('#NomeCidadeAutoCompletar').autocomplete({
+                source: listaNomeCidade,
+                minLenght: 3
             })
         });
     });
