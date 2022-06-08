@@ -14,6 +14,12 @@ namespace AppMinhaBahia.Data
             _context = context;
         }
 
+        public Cidade BuscarCidadePorNome(string nome)
+        {
+            var cidade = _context.Cidades.FirstOrDefault(c => c.Nome == nome);
+            return cidade;
+        }
+
         public List<Cidade> ListaDeCidades()
         {
             return _context.Cidades.ToList();

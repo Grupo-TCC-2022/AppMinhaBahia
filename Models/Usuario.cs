@@ -16,8 +16,7 @@ namespace AppMinhaBahia.Models
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         public string CPF { get; set; }
         [Display(Name = "Nome da cidade")]
-        [Required(ErrorMessage = "Este campo é obrigatorio")]
-        public Cidade NomeCidade { get; set; }
+        public Cidade Cidade { get; set; }
         [DataType(DataType.Password)]
         [MinLength(3,ErrorMessage ="Senha inválida, informe no mínimo 3 caracteres")]
         [MaxLength(50, ErrorMessage = "Senha excedeu o tamanho permitido")]

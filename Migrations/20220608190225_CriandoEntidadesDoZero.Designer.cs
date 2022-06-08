@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppMinhaBahia.Migrations
 {
     [DbContext(typeof(AppMinhaBahiaContext))]
-    [Migration("20220608180159_CriandoEntidadesDoZero")]
+    [Migration("20220608190225_CriandoEntidadesDoZero")]
     partial class CriandoEntidadesDoZero
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

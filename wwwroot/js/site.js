@@ -12,7 +12,6 @@ $(document).ready(function () {
             for (var i = 0, len = data.length; i < len; i++){
                 listaNomeCidade.push(data[i].nome);
             }
-            console.log(listaNomeCidade);
             $('#NomeCidadeAutoCompletar').autocomplete({
                 source: listaNomeCidade,
                 minLenght: 3

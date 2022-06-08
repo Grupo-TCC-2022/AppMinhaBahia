@@ -12,10 +12,12 @@ namespace AppMinhaBahia.Controllers
     public class UsuarioController : Controller
     {
         private readonly UsuarioRepositorio _repositorio;
+        private readonly CidadeRepositorio _cidadeRepositorio;
 
-        public UsuarioController(UsuarioRepositorio repositorio)
+        public UsuarioController(UsuarioRepositorio repositorio, CidadeRepositorio cidadeRepositorio)
         {
             _repositorio = repositorio;
+            _cidadeRepositorio = cidadeRepositorio;
         }
 
         public IActionResult Cadastrar()
@@ -25,8 +27,26 @@ namespace AppMinhaBahia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Cadastrar([Bind("NomeCompleto, CPF, NomeCidade, Senha")] Usuario usuario)
+        public async Task<IActionResult> Cadastrar([Bind("NomeCompleto, CPF, Senha")] Usuario usuario, string NomeCidade)
         {
+            var cidade = _cidadeRepositorio.BuscarCidadePorNome(NomeCidade);
+
+            if (cidade != null)
+            {
+                usuario.Cidade = cidade;
+            }
+            else
+            {
+                if (NomeCidade == null || NomeCidade == "")
+                {
+                    ModelState.AddModelError("Cidade", "Este campo é obrigatorio");
+                }
+                else
+                {
+                    ModelState.AddModelError("Cidade", "Cidade não encontrada no sistema");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 var usuarioExiste = _repositorio.UsuarioExiste(usuario.CPF);
