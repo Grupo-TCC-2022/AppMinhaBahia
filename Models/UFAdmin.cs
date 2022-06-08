@@ -13,7 +13,7 @@ namespace AppMinhaBahia.Models
         {
             var requisicao = this.Requisicoes.FirstOrDefault(r => r.Id == requisicaoId);
             requisicao.Status = "Aprovada";
-            return "Requisição aprovada.";
+            return "Requisição aprovada";
         }
     }
 }

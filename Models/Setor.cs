@@ -19,7 +19,7 @@ namespace AppMinhaBahia.Models
 
             if (ocorrencia.Custo > this.Verba)
             {
-                return "Custo de ocorrencia excede a verba do setor.";
+                return "Custo de ocorrencia excede a verba do setor";
             }
 
             int funcionariosDisponivel = 0;
@@ -32,12 +32,12 @@ namespace AppMinhaBahia.Models
             }
             if (ocorrencia.Funcionarios > funcionariosDisponivel)
             {
-                return "Mão de obra necessaria excede a quantidade atual disponível do setor.";
+                return "Mão de obra necessaria excede a quantidade atual disponível do setor";
             }
 
             if (ocorrencia.Status == "Aprovada")
             {
-                return "Não pode aprovar uma ocorrência que já foi aprovada.";
+                return "Não pode aprovar uma ocorrência que já foi aprovada";
             }
 
             ocorrencia.Status = "Aprovada";
@@ -61,7 +61,7 @@ namespace AppMinhaBahia.Models
                 }
             }
 
-            return "Ocorrência aprovada com sucesso.";
+            return "Ocorrência aprovada com sucesso";
         }
 
         public Requisicao SolicitarVerbaMunicipal(double valor)

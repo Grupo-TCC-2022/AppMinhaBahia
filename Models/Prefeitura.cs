@@ -24,36 +24,40 @@ namespace AppMinhaBahia.Models
             ocorrencia.Funcionarios = numeroDeFuncionarios;
         }
 
-        public string EncaminharOcorrencia(int ocorrenciaId, int setorId)
+        public object EncaminharOcorrencia(int ocorrenciaId, int setorId)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
-
+            
             if (ocorrencia.Custo == null)
             {
-                return "Custo de ocorrencia ainda não processado.";
+                return "Custo de ocorrencia ainda não processado";
             }
             if (ocorrencia.Funcionarios == null)
             {
-                return "Mão de obra necessaria ainda não processada.";
+                return "Mão de obra necessaria ainda não processada";
             }
 
             var setor = this.Setores.FirstOrDefault(s => s.Id == setorId);
-
+            
+            if (ocorrencia.Status == "Arquivada")
+            {
+                return "Não pode encaminhar uma ocorrência arquivada";
+            }
             if (ocorrencia.Status == "Encaminhada")
             {
-                return "Não pode encaminhar uma ocorrência que já foi encaminhada.";
+                return "Não pode encaminhar uma ocorrência que já foi encaminhada";
             }
 
             ocorrencia.Status = "Encaminhada";
             setor.Ocorrencias.Add(ocorrencia);
-            return "Ocorrência encaminhada com sucesso.";
+            return "Ocorrência encaminhada com sucesso";
         }
 
         public string ArquivarOcorrencia(int ocorrenciaId)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
             ocorrencia.Status = "Arquivada";
-            return "Ocorrência arquivada com sucesso.";
+            return "Ocorrência arquivada com sucesso";
         }
 
         public string ProcessarRequisicao(int requisicaoId)
@@ -64,11 +68,11 @@ namespace AppMinhaBahia.Models
             {
                 if (requisicao.Verba > this.VerbaMunicipal)
                 {
-                    return "Verba solicitada excede o recurso estadual.";
+                    return "Verba solicitada excede o recurso estadual";
                 }
 
                 requisicao.Status = "Aprovada";
-                return "Requisição aprovada.";
+                return "Requisição aprovada";
             }
 
             if (requisicao.Tipo == "Contratação")
@@ -77,14 +81,14 @@ namespace AppMinhaBahia.Models
 
                 if (custoTotalContratacao > this.VerbaMunicipal)
                 {
-                    return "Contratação solicitada excede o recurso estadual.";
+                    return "Contratação solicitada excede o recurso estadual";
                 }
 
                 requisicao.Status = "Reprovada";
-                return "Requisição reprovada.";
+                return "Requisição reprovada";
             }
 
-            return "Tipo de requisição não informado.";
+            return "Tipo de requisição não informado";
         }
 
         public Requisicao SolicitarVerbaEstadual(double valor)
