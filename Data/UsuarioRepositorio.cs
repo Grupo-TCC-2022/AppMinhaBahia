@@ -35,7 +35,7 @@ namespace AppMinhaBahia.Data
         public async Task ReportarOcorrencia(int usuarioId, Ocorrencia ocorrencia)
         {
             var usuarioAtual = _context.Usuarios.FirstOrDefault(u => u.Id == usuarioId);
-            var prefeitura = _context.Prefeituras.FirstOrDefault(p => p.NomeCidade == usuarioAtual.NomeCidade);
+            var prefeitura = _context.Prefeituras.FirstOrDefault(p => p.Cidade == usuarioAtual.Cidade);
 
             usuarioAtual.ReportarOcorrencia(ocorrencia, prefeitura);
             await _context.SaveChangesAsync();
