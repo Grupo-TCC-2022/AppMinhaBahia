@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,9 +6,10 @@ namespace AppMinhaBahia.Models
 {
     public class Prefeitura : Usuario
     {
+        public UFAdmin UF { get; set; }
         public ICollection<Setor> Setores { get; set; }
         public ICollection<Requisicao> Requisicoes { get; set; }
-        public double VerbaEstadual { get; set; }
+        public double VerbaMunicipal { get; set; }
         public double SalarioMedioPorFuncionario { get; set; }
 
         public void DefinirCusto(int ocorrenciaId, double valor)
@@ -60,35 +62,41 @@ namespace AppMinhaBahia.Models
 
             if (requisicao.Tipo == "Verba")
             {
-                if (requisicao.Verba > this.VerbaEstadual)
+                if (requisicao.Verba > this.VerbaMunicipal)
                 {
                     return "Verba solicitada excede o recurso estadual.";
                 }
 
                 requisicao.Status = "Aprovada";
-                return "Requisição aprovada com sucesso.";
+                return "Requisição aprovada.";
             }
 
             if (requisicao.Tipo == "Contratação")
             {
                 double custoTotalContratacao = (double) requisicao.Funcionarios * this.SalarioMedioPorFuncionario;
 
-                if (custoTotalContratacao > this.VerbaEstadual)
+                if (custoTotalContratacao > this.VerbaMunicipal)
                 {
                     return "Contratação solicitada excede o recurso estadual.";
                 }
 
                 requisicao.Status = "Reprovada";
-                return "Requisição aprovada com sucesso.";
+                return "Requisição reprovada.";
             }
 
             return "Tipo de requisição não informado.";
         }
 
-        /* Como o ambito federal foge do escopo do projeto, o valor será simplesmente adicionado */
-        public void SolicitarVerbaFederal(double valor)
+        public Requisicao SolicitarVerbaEstadual(double valor)
         {
-            this.VerbaEstadual += valor;
+            Requisicao requisicao = new Requisicao();
+            requisicao.Tipo = "Verba";
+            requisicao.Prefeitura = this;
+            requisicao.Data = DateTime.Today;
+            requisicao.Verba = valor;
+
+            this.UF.Requisicoes.Add(requisicao);
+            return requisicao;
         }
     }
 }

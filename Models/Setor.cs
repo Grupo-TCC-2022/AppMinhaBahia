@@ -64,7 +64,7 @@ namespace AppMinhaBahia.Models
             return "Ocorrência aprovada com sucesso.";
         }
 
-        public Requisicao SolicitarVerba(double valor)
+        public Requisicao SolicitarVerbaMunicipal(double valor)
         {
             Requisicao requisicao = new Requisicao();
             requisicao.Tipo = "Verba";
