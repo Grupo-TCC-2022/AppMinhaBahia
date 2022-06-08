@@ -10,8 +10,15 @@ namespace AppMinhaBahia.Models
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         public string LocalEspecifico { get; set; }
-        public double CustoEstimado { get; set; }
-        public int MaoDeObraNecessaria { get; set; }
+        public double? Custo { get; set; }
+        public int? MaoDeObra { get; set; }
         public DateTime Data { get; set; }
+        // Em analize ou Encaminhada
+        public string Status { get; set; }
+
+        public Ocorrencia()
+        {
+            this.Status = "Em analize";
+        }
     }
 }

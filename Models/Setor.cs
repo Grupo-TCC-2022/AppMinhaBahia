@@ -10,7 +10,7 @@ namespace AppMinhaBahia.Models
         public int PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }
         public IEnumerable<Funcionario> MaoDeObra { get; set; }
-        public IEnumerable<Ocorrencia> Ocorrencias { get; set; }
+        public ICollection<Ocorrencia> Ocorrencias { get; set; }
         public IEnumerable<Requisicao> Requisicoes { get; set; }
     }
 }

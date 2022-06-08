@@ -5,7 +5,7 @@ namespace AppMinhaBahia.Models
     public class Requisicao
     {
         public int Id { get; set; }
-        // Fundos ou contratacao
+        // Fundos ou Contratacao
         public string Tipo { get; set; }
         public int SetorId { get; set; }
         public Setor Setor { get; set; }
