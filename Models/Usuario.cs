@@ -13,6 +13,11 @@ namespace AppMinhaBahia.Models
         [MaxLength(50, ErrorMessage = "Nome excedeu o tamanho permitido")]
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         public string NomeCompleto { get; set; }
+        [Display(Name = "Cidade")]
+        [MinLength(3,ErrorMessage ="Nome inválido, informe no mínimo 3 caracteres")]
+        [MaxLength(50, ErrorMessage = "Nome excedeu o tamanho permitido")]
+        [Required(ErrorMessage = "Este campo é obrigatorio")]
+        public string NomeCidade { get; set; }
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         public string CPF { get; set; }
         [DataType(DataType.Password)]
@@ -22,17 +27,12 @@ namespace AppMinhaBahia.Models
         public string Senha { get; set; }
         public ICollection<Ocorrencia> Ocorrencias { get; set; }
 
-        public Ocorrencia ReportarOcorrencia(string tipo, string descricao, string localEspecifico)
-        {
-            Ocorrencia ocorrencia = new Ocorrencia();
-            ocorrencia.Tipo = tipo;
-            ocorrencia.Descricao = descricao;
-            ocorrencia.Usuario = this;
-            ocorrencia.LocalEspecifico = localEspecifico;
+        public void ReportarOcorrencia(Ocorrencia ocorrencia, Prefeitura prefeitura)
+        {   
             ocorrencia.Data = DateTime.Today;
-
+            
+            prefeitura.Ocorrencias.Add(ocorrencia);
             this.Ocorrencias.Add(ocorrencia);
-            return ocorrencia;
         }
     }
 }

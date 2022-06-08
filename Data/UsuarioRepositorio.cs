@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using AppMinhaBahia.Models;
 
@@ -12,9 +13,17 @@ namespace AppMinhaBahia.Data
             _context = context;
         }
 
-        public async Task Criar(Usuario usuario)
+        public async Task Registrar(Usuario usuario)
         {
             _context.Add(usuario);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task ReportarOcorrencia(Ocorrencia ocorrencia)
+        {
+            // TODO:
+            var prefeitura = _context.Prefeituras.FirstOrDefault(p => p.NomeCidade == USUARIOATUALCIDADE);
+            USUARIOATUAL.ReportarOcorrencia(ocorrencia, Prefeitura);
             await _context.SaveChangesAsync();
         }
     }
