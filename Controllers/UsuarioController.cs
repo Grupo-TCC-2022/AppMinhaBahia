@@ -14,14 +14,14 @@ namespace AppMinhaBahia.Controllers
             _repositorio = repositorio;
         }
 
-        public IActionResult Create()
+        public IActionResult Criar()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NomeCompleto, CPF, Senha")] Usuario usuario)
+        public async Task<IActionResult> Criar([Bind("NomeCompleto, CPF, Senha")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {

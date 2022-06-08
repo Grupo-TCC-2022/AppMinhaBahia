@@ -4,7 +4,7 @@
     ViewData["Title"] = "Cadastrar";
 }
 
-<form>
+<form asp-controller="Usuario" asp-action="Criar" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <fieldset>
         <div class="form-group">
