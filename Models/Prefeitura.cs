@@ -17,10 +17,10 @@ namespace AppMinhaBahia.Models
             ocorrencia.Custo = valor;
         }
 
-        public void DefinirMaoDeObra(int ocorrenciaId, int numeroDeFuncionarios)
+        public void DefinirFuncionarios(int ocorrenciaId, int numeroDeFuncionarios)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
-            ocorrencia.MaoDeObra = numeroDeFuncionarios;
+            ocorrencia.Funcionarios = numeroDeFuncionarios;
         }
 
         public string EncaminharOcorrencia(int ocorrenciaId, int setorId)
@@ -31,7 +31,7 @@ namespace AppMinhaBahia.Models
             {
                 return "Custo de ocorrencia ainda não processado.";
             }
-            if (ocorrencia.MaoDeObra == null)
+            if (ocorrencia.Funcionarios == null)
             {
                 return "Mão de obra necessaria ainda não processada.";
             }

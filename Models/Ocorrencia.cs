@@ -11,7 +11,7 @@ namespace AppMinhaBahia.Models
         public Usuario Usuario { get; set; }
         public string LocalEspecifico { get; set; }
         public double? Custo { get; set; }
-        public int? MaoDeObra { get; set; }
+        public int? Funcionarios { get; set; }
         public DateTime Data { get; set; }
         // Em analize, Encaminhada, Aprovada ou Arquivada
         public string Status { get; set; }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +11,7 @@ namespace AppMinhaBahia.Models
         public double Fundos { get; set; }
         public int PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }
-        public List<Funcionario> MaoDeObra { get; set; }
+        public List<Funcionario> Funcionarios { get; set; }
         public ICollection<Ocorrencia> Ocorrencias { get; set; }
         public IEnumerable<Requisicao> Requisicoes { get; set; }
 
@@ -23,15 +24,15 @@ namespace AppMinhaBahia.Models
                 return "Custo de ocorrencia excede os fundos do setor.";
             }
 
-            int maoDeObraDisponivel = 0;
-            for (int i = 0; i < MaoDeObra.Count; i++)
+            int funcionariosDisponivel = 0;
+            for (int i = 0; i < Funcionarios.Count; i++)
             {
-                if (MaoDeObra[i].Disponivel)
+                if (Funcionarios[i].Disponivel)
                 {
-                    maoDeObraDisponivel += 1;
+                    funcionariosDisponivel += 1;
                 }
             }
-            if (ocorrencia.MaoDeObra > maoDeObraDisponivel)
+            if (ocorrencia.Funcionarios > funcionariosDisponivel)
             {
                 return "Mão de obra necessaria excede a quantidade atual disponível do setor.";
             }
@@ -43,6 +44,30 @@ namespace AppMinhaBahia.Models
 
             ocorrencia.Status = "Aprovada";
             return "Ocorrência Aprovada com sucesso.";
+        }
+
+        public Requisicao PedirFundos(double valor)
+        {
+            Requisicao requisicao = new Requisicao();
+            requisicao.Tipo = "Fundos";
+            requisicao.Setor = this;
+            requisicao.Prefeitura = this.Prefeitura;
+            requisicao.Data = DateTime.Today;
+            requisicao.Fundos = valor;
+
+            return requisicao;
+        }
+
+        public Requisicao PedirMaisFuncionarios(int quantidade)
+        {
+            Requisicao requisicao = new Requisicao();
+            requisicao.Tipo = "Contratação";
+            requisicao.Setor = this;
+            requisicao.Prefeitura = this.Prefeitura;
+            requisicao.Data = DateTime.Today;
+            requisicao.Funcionarios = quantidade;
+
+            return requisicao;
         }
     }
 }
