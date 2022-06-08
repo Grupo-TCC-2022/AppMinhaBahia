@@ -1,0 +1,27 @@
+@model AppMinhaBahia.Models.Usuario
+
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<form>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <fieldset>
+        <div class="form-group">
+            <label asp-for="NomeCompleto" class="control-label"></label>
+            <input asp-for="NomeCompleto" class="form-control" />
+            <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CPF" class="control-label"></label>
+            <input asp-for="CPF" class="form-control" />
+            <span asp-validation-for="CPF" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Senha" class="control-label"></label>
+            <input asp-for="Senha" class="form-control" />
+            <span asp-validation-for="Senha" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </fieldset>
+</form>
