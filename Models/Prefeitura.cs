@@ -38,7 +38,7 @@ namespace AppMinhaBahia.Models
 
             var setor = this.Setores.FirstOrDefault(s => s.Id == setorId);
 
-            if (setor.Ocorrencias.Any(o => o.Id == ocorrenciaId))
+            if (ocorrencia.Status == "Encaminhada")
             {
                 return "Não pode encaminhar uma ocorrência que já foi encaminhada.";
             }

@@ -36,6 +36,11 @@ namespace AppMinhaBahia.Models
                 return "Mão de obra necessaria excede a quantidade atual disponível do setor.";
             }
 
+            if (ocorrencia.Status == "Aprovada")
+            {
+                return "Não pode aprovar uma ocorrência que já foi aprovada.";
+            }
+
             ocorrencia.Status = "Aprovada";
             return "Ocorrência Aprovada com sucesso.";
         }
