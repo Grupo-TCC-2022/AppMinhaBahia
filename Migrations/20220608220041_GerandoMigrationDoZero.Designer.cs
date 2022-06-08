@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppMinhaBahia.Migrations
 {
     [DbContext(typeof(AppMinhaBahiaContext))]
-    [Migration("20220608190225_CriandoEntidadesDoZero")]
-    partial class CriandoEntidadesDoZero
+    [Migration("20220608220041_GerandoMigrationDoZero")]
+    partial class GerandoMigrationDoZero
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -4418,7 +4418,7 @@ namespace AppMinhaBahia.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("CidadeId")
+                    b.Property<int?>("CidadeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Discriminator")
@@ -4554,9 +4554,7 @@ namespace AppMinhaBahia.Migrations
                 {
                     b.HasOne("AppMinhaBahia.Models.Cidade", "Cidade")
                         .WithMany()
-                        .HasForeignKey("CidadeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CidadeId");
                 });
 
             modelBuilder.Entity("AppMinhaBahia.Models.Funcionario", b =>

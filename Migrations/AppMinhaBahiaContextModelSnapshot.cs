@@ -4416,7 +4416,7 @@ namespace AppMinhaBahia.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("CidadeId")
+                    b.Property<int?>("CidadeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Discriminator")
@@ -4552,9 +4552,7 @@ namespace AppMinhaBahia.Migrations
                 {
                     b.HasOne("AppMinhaBahia.Models.Cidade", "Cidade")
                         .WithMany()
-                        .HasForeignKey("CidadeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CidadeId");
                 });
 
             modelBuilder.Entity("AppMinhaBahia.Models.Funcionario", b =>

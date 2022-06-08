@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AppMinhaBahia.Migrations
 {
-    public partial class CriandoEntidadesDoZero : Migration
+    public partial class GerandoMigrationDoZero : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,7 @@ namespace AppMinhaBahia.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     NomeCompleto = table.Column<string>(maxLength: 50, nullable: false),
                     CPF = table.Column<string>(nullable: false),
-                    CidadeId = table.Column<int>(nullable: false),
+                    CidadeId = table.Column<int>(nullable: true),
                     Senha = table.Column<string>(maxLength: 50, nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
                     SetorId = table.Column<int>(nullable: true),
@@ -89,7 +89,7 @@ namespace AppMinhaBahia.Migrations
                         column: x => x.CidadeId,
                         principalTable: "Cidades",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
