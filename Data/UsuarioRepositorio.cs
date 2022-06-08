@@ -14,7 +14,7 @@ namespace AppMinhaBahia.Data
             _context = context;
         }
 
-        public async Task Registrar(Usuario usuario)
+        public async Task Cadastrar(Usuario usuario)
         {
             _context.Add(usuario);
             await _context.SaveChangesAsync();

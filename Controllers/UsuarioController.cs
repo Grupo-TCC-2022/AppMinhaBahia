@@ -18,18 +18,18 @@ namespace AppMinhaBahia.Controllers
             _repositorio = repositorio;
         }
 
-        public IActionResult Criar()
+        public IActionResult Cadastrar()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registrar([Bind("NomeCompleto, CPF, Senha")] Usuario usuario)
+        public async Task<IActionResult> Cadastrar([Bind("NomeCompleto, CPF, Senha")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                await _repositorio.Registrar(usuario);
+                await _repositorio.Cadastrar(usuario);
                 return RedirectToAction("Index", "Home");
             }
             return View(usuario);
