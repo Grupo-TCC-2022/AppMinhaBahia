@@ -24,55 +24,75 @@ namespace AppMinhaBahia.Models
             ocorrencia.Funcionarios = numeroDeFuncionarios;
         }
 
-        public object EncaminharOcorrencia(int ocorrenciaId, int setorId)
+        public Dictionary<string, string> EncaminharOcorrencia(int ocorrenciaId, int setorId)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
+            Dictionary<string, string> situacao = new Dictionary<string,string>();
             
             if (ocorrencia.Custo == null)
-            {
-                return "Custo de ocorrencia ainda não processado";
+            {   
+                situacao.Add("status", "alerta");
+                situacao.Add("mensagem", "Custo de ocorrencia ainda não processado");
+                return situacao;
             }
             if (ocorrencia.Funcionarios == null)
             {
-                return "Mão de obra necessaria ainda não processada";
+                situacao.Add("status", "alerta");
+                situacao.Add("mensagem", "Mão de obra necessaria ainda não processada");
+                return situacao;
             }
 
             var setor = this.Setores.FirstOrDefault(s => s.Id == setorId);
             
             if (ocorrencia.Status == "Arquivada")
             {
-                return "Não pode encaminhar uma ocorrência arquivada";
+                situacao.Add("status", "erro");
+                situacao.Add("mensagem", "Não pode encaminhar uma ocorrência arquivada");
+                return situacao;
             }
             if (ocorrencia.Status == "Encaminhada")
             {
-                return "Não pode encaminhar uma ocorrência que já foi encaminhada";
+                situacao.Add("status", "erro");
+                situacao.Add("mensagem", "Não pode encaminhar uma ocorrência que já foi encaminhada");
+                return situacao;
             }
 
             ocorrencia.Status = "Encaminhada";
             setor.Ocorrencias.Add(ocorrencia);
-            return "Ocorrência encaminhada com sucesso";
+            situacao.Add("status", "sucesso");
+            situacao.Add("mensagem", "Ocorrência encaminhada com sucesso");
+            return situacao;
         }
 
-        public string ArquivarOcorrencia(int ocorrenciaId)
+        public Dictionary<string, string> ArquivarOcorrencia(int ocorrenciaId)
         {
+            Dictionary<string, string> situacao = new Dictionary<string,string>();
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
             ocorrencia.Status = "Arquivada";
-            return "Ocorrência arquivada com sucesso";
+            situacao.Add("status", "sucesso");
+            situacao.Add("mensagem", "Ocorrência arquivada com sucesso");
+            return situacao;
         }
 
-        public string ProcessarRequisicao(int requisicaoId)
+        public Dictionary<string, string> ProcessarRequisicao(int requisicaoId)
         {
             var requisicao = this.Requisicoes.FirstOrDefault(r => r.Id == requisicaoId);
+            Dictionary<string, string> situacao = new Dictionary<string,string>();
 
             if (requisicao.Tipo == "Verba")
             {
                 if (requisicao.Verba > this.VerbaMunicipal)
                 {
-                    return "Verba solicitada excede o recurso estadual";
+                    situacao.Add("status", "erro");
+                    situacao.Add("mensagem", "Verba solicitada excede o recurso estadual");
+                    return situacao;
                 }
 
                 requisicao.Status = "Aprovada";
-                return "Requisição aprovada";
+                requisicao.Setor.Verba += (double) requisicao.Verba;
+                situacao.Add("status", "sucesso");
+                situacao.Add("mensagem", "Requisição aprovada");
+                return situacao;
             }
 
             if (requisicao.Tipo == "Contratação")
@@ -81,14 +101,31 @@ namespace AppMinhaBahia.Models
 
                 if (custoTotalContratacao > this.VerbaMunicipal)
                 {
-                    return "Contratação solicitada excede o recurso estadual";
+                    situacao.Add("status", "erro");
+                    situacao.Add("mensagem", "Contratação solicitada excede o recurso estadual");
+                    return situacao;
                 }
-
+                
                 requisicao.Status = "Reprovada";
-                return "Requisição reprovada";
+                // Forma inadequada de implementar, so existe para não fugirmos do escopo simplex desse projeto
+                // TODO: Implementar um seeder que coloque valores mais reais
+                Random random = new Random();
+                for (int i = 0; i < requisicao.Funcionarios; i++)
+                {
+                    requisicao.Setor.Funcionarios.Add(new Funcionario() {
+                        CPF = random.Next().ToString(),
+                        NomeCompleto = random.Next().ToString(),
+                        NomeCidade = this.NomeCidade
+                    });
+                }
+                situacao.Add("status", "sucesso");
+                situacao.Add("mensagem", "Requisição aprovada");
+                return situacao;
             }
 
-            return "Tipo de requisição não informado";
+            situacao.Add("status", "alerta");
+            situacao.Add("mensagem", "Tipo de requisição não informado");
+            return situacao;
         }
 
         public Requisicao SolicitarVerbaEstadual(double valor)

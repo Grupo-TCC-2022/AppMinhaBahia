@@ -13,13 +13,16 @@ namespace AppMinhaBahia.Models
         public List<Funcionario> Funcionarios { get; set; }
         public IEnumerable<Requisicao> Requisicoes { get; set; }
 
-        public string AbrirIntervencao(int ocorrenciaId, string descricao)
+        public Dictionary<string, string> AbrirIntervencao(int ocorrenciaId, string descricao)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
+            Dictionary<string, string> situacao = new Dictionary<string,string>();
 
             if (ocorrencia.Custo > this.Verba)
             {
-                return "Custo de ocorrencia excede a verba do setor";
+                situacao.Add("status", "erro");
+                situacao.Add("mensagem", "Custo de ocorrencia excede a verba do setor");
+                return situacao;
             }
 
             int funcionariosDisponivel = 0;
@@ -32,12 +35,16 @@ namespace AppMinhaBahia.Models
             }
             if (ocorrencia.Funcionarios > funcionariosDisponivel)
             {
-                return "Mão de obra necessaria excede a quantidade atual disponível do setor";
+                situacao.Add("status", "erro");
+                situacao.Add("mensagem", "Mão de obra necessaria excede a quantidade atual disponível do setor");
+                return situacao;
             }
 
             if (ocorrencia.Status == "Aprovada")
             {
-                return "Não pode aprovar uma ocorrência que já foi aprovada";
+                situacao.Add("status", "erro");
+                situacao.Add("mensagem", "Não pode aprovar uma ocorrência que já foi aprovada");
+                return situacao;
             }
 
             ocorrencia.Status = "Aprovada";
@@ -61,7 +68,9 @@ namespace AppMinhaBahia.Models
                 }
             }
 
-            return "Ocorrência aprovada com sucesso";
+            situacao.Add("status", "sucesso");
+            situacao.Add("mensagem", "Ocorrência aprovada com sucesso");
+            return situacao;
         }
 
         public Requisicao SolicitarVerbaMunicipal(double valor)
