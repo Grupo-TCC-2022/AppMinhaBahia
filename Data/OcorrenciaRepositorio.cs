@@ -13,13 +13,9 @@ namespace AppMinhaBahia.Data
             _context = context;
         }
 
-        public IEnumerable<Ocorrencia> ListaDeOcorrencias(int usuarioId, string status)
+        public IEnumerable<Ocorrencia> ListaDeOcorrencias(string status)
         {
-            return _context.Ocorrencias.Where(
-                o => o.UsuarioId == usuarioId
-                &&
-                o.Status == status
-            ).ToList();
+            return _context.Ocorrencias.Where(o => o.Status == status).ToList();
         }
     }
 }

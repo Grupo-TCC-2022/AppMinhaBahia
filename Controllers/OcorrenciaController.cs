@@ -15,8 +15,7 @@ namespace AppMinhaBahia.Controllers
 
         public IActionResult Index(string status)
         {
-            int usuarioId = Int32.Parse(User.FindFirst("id").Value);
-            return View(_repositorio.ListaDeOcorrencias(usuarioId, status));
+            return View(_repositorio.ListaDeOcorrencias(status));
         }
     }
 }
