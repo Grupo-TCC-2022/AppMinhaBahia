@@ -8,7 +8,7 @@ namespace AppMinhaBahia.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public double Fundos { get; set; }
+        public double Verba { get; set; }
         public int PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }
         public List<Funcionario> Funcionarios { get; set; }
@@ -19,9 +19,9 @@ namespace AppMinhaBahia.Models
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
 
-            if (ocorrencia.Custo > this.Fundos)
+            if (ocorrencia.Custo > this.Verba)
             {
-                return "Custo de ocorrencia excede os fundos do setor.";
+                return "Custo de ocorrencia excede a verba do setor.";
             }
 
             int funcionariosDisponivel = 0;
@@ -46,14 +46,14 @@ namespace AppMinhaBahia.Models
             return "Ocorrência Aprovada com sucesso.";
         }
 
-        public Requisicao PedirFundos(double valor)
+        public Requisicao PedirVerba(double valor)
         {
             Requisicao requisicao = new Requisicao();
-            requisicao.Tipo = "Fundos";
+            requisicao.Tipo = "Verba";
             requisicao.Setor = this;
             requisicao.Prefeitura = this.Prefeitura;
             requisicao.Data = DateTime.Today;
-            requisicao.Fundos = valor;
+            requisicao.Verba = valor;
 
             return requisicao;
         }
