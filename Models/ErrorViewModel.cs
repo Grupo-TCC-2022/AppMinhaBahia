@@ -1,5 +1,3 @@
-using System;
-
 namespace AppMinhaBahia.Models
 {
     public class ErrorViewModel
