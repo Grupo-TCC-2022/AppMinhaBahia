@@ -8,7 +8,7 @@ namespace AppMinhaBahia.Models
         public int Id { get; set; }
         public string NomeCompleto { get; set; }
         public string CPF { get; set; }
-        public IEnumerable<Ocorrencia> Ocorrencias { get; set; }
+        public ICollection<Ocorrencia> Ocorrencias { get; set; }
 
         public Ocorrencia ReportarOcorrencia(string tipo, string descricao, string localEspecifico)
         {
@@ -19,6 +19,7 @@ namespace AppMinhaBahia.Models
             ocorrencia.LocalEspecifico = localEspecifico;
             ocorrencia.Data = DateTime.Today;
 
+            this.Ocorrencias.Add(ocorrencia);
             return ocorrencia;
         }
     }
