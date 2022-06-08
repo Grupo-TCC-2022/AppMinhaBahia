@@ -63,19 +63,26 @@ namespace AppMinhaBahia.Controllers
             return View(usuario);
         }
 
-        public IActionResult FazerLogin()
+        public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> FazerLogin(string CPF, string Senha)
+        public async Task<IActionResult> Login(string CPF, string Senha)
         {
             var usuario = _repositorio.BuscarUsuarioPorCPF(CPF);
             
+            if (usuario == null)
+            {
+                ModelState.AddModelError("CPF", "Este campo é obrigatorio");
+                return View(usuario);
+            }
+
             if (usuario.Senha != Senha)
             {
+                ModelState.AddModelError("Senha", "Senha invalida");
                 return View(usuario);
             }
 
