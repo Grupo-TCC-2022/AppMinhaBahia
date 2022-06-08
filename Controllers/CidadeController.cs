@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using AppMinhaBahia.Data;
-using System.Linq;
 
 namespace AppMinhaBahia.Controllers
 {
