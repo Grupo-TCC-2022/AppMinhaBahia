@@ -7,5 +7,10 @@ namespace AppMinhaBahia.Models
         public bool Disponivel { get; set; }
         public int? IntervencaoId { get; set; }
         public Intervencao Intervencao { get; set; }
+
+        public Funcionario()
+        {
+            this.Disponivel = true;
+        }
     }
 }

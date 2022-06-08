@@ -23,12 +23,30 @@ namespace AppMinhaBahia.Models
             ocorrencia.MaoDeObra = numeroDeFuncionarios;
         }
 
-        public void  EncaminharOcorrencia(int ocorrenciaId, int setorId)
+        public string EncaminharOcorrencia(int ocorrenciaId, int setorId)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
+
+            if (ocorrencia.Custo == null)
+            {
+                return "Custo de ocorrencia ainda não processado.";
+            }
+            if (ocorrencia.MaoDeObra == null)
+            {
+                return "Mão de obra necessaria ainda não processada.";
+            }
+
             var setor = this.Setores.FirstOrDefault(s => s.Id == setorId);
             ocorrencia.Status = "Encaminhada";
             setor.Ocorrencias.Add(ocorrencia);
+            return "Ocorrência encaminhada com sucesso.";
+        }
+
+        public string ArquivarOcorrencia(int ocorrenciaId)
+        {
+            var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
+            ocorrencia.Status = "Arquivada";
+            return "Ocorrência arquivada com sucesso.";
         }
     }
 }

@@ -13,7 +13,7 @@ namespace AppMinhaBahia.Models
         public double? Custo { get; set; }
         public int? MaoDeObra { get; set; }
         public DateTime Data { get; set; }
-        // Em analize ou Encaminhada
+        // Em analize, Encaminhada, Aprovada ou Arquivada
         public string Status { get; set; }
 
         public Ocorrencia()
