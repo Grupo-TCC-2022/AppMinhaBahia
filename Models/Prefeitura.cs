@@ -5,7 +5,6 @@ namespace AppMinhaBahia.Models
 {
     public class Prefeitura : Usuario
     {
-        public string NomeCidade { get; set; }
         public ICollection<Setor> Setores { get; set; }
         public ICollection<Requisicao> Requisicoes { get; set; }
         public double VerbaEstadual { get; set; }

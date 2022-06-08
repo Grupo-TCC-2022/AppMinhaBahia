@@ -9,6 +9,7 @@ namespace AppMinhaBahia.Data
         {
         }
 
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Prefeitura> Prefeituras { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

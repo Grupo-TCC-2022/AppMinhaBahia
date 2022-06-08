@@ -30,6 +30,14 @@ namespace AppMinhaBahia
             {
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddAuthentication("Identity.Login")
+                .AddCookie("Identity.Login", config =>
+                {
+                    config.Cookie.Name = "Identity.Login";
+                    config.LoginPath = "/Home";
+                    config.AccessDeniedPath = "/Home";
+                    config.ExpireTimeSpan = TimeSpan.FromHours(1);
+                });
             services.AddScoped<UsuarioRepositorio>();
         }
 
