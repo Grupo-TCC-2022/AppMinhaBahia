@@ -7,10 +7,9 @@ namespace AppMinhaBahia.Models
     {
         public int Id { get; set; }
         public string Descricao { get; set; }
-        public string Status { get; set; }
         public int OcorrenciaId { get; set; }
         public Ocorrencia Ocorrencia { get; set; }
-        public IEnumerable<Funcionario> MaoDeObra { get; set; }
+        public ICollection<Funcionario> FuncionariosAlocados { get; set; }
         public DateTime Data { get; set; }
     }
 }

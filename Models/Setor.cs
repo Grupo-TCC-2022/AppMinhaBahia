@@ -13,7 +13,7 @@ namespace AppMinhaBahia.Models
         public List<Funcionario> Funcionarios { get; set; }
         public IEnumerable<Requisicao> Requisicoes { get; set; }
 
-        public string AbrirIntervencao(int ocorrenciaId)
+        public string AbrirIntervencao(int ocorrenciaId, string descricao)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
 
@@ -41,7 +41,27 @@ namespace AppMinhaBahia.Models
             }
 
             ocorrencia.Status = "Aprovada";
-            // TODO: Intervencao
+            
+            Intervencao intervencao = new Intervencao();
+            intervencao.Descricao = descricao;
+            intervencao.Ocorrencia = ocorrencia;
+            intervencao.Data = DateTime.Today;
+
+            int funcionariosNecessarios = (int) ocorrencia.Funcionarios;
+
+            for (int i = 0; i < this.Funcionarios.Count; i++)
+            {
+                var funcionario = this.Funcionarios[i];
+                int jaAlocados = intervencao.FuncionariosAlocados.Count;
+
+                if (funcionario.Disponivel && jaAlocados < funcionariosNecessarios)
+                {
+                    funcionario.Disponivel = false;
+                    funcionario.Intervencao = intervencao;
+                    intervencao.FuncionariosAlocados.Add(this.Funcionarios[i]);
+                }
+            }
+
             return "Ocorrência aprovada com sucesso.";
         }
 

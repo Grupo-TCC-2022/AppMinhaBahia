@@ -13,6 +13,8 @@ namespace AppMinhaBahia.Models
         public double? Custo { get; set; }
         public int? Funcionarios { get; set; }
         public DateTime Data { get; set; }
+        public int IntervencaoId { get; set; }
+        public Intervencao Intervencao { get; set; }
         // Em analize, Encaminhada, Aprovada ou Arquivada
         public string Status { get; set; }
 
