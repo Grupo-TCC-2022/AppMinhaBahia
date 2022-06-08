@@ -68,6 +68,16 @@ namespace AppMinhaBahia.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Sair()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                await HttpContext.SignOutAsync();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string CPF, string Senha)
