@@ -29,6 +29,14 @@ namespace AppMinhaBahia.Controllers
         {
             if (ModelState.IsValid)
             {
+                var usuarioExiste = _repositorio.UsuarioExiste(usuario.CPF);
+
+                if (usuarioExiste)
+                {
+                    ModelState.AddModelError("CPF", "CPF já cadastrado no sistema");
+                    return View(usuario);
+                }
+
                 await _repositorio.Cadastrar(usuario);
                 return RedirectToAction("Index", "Home");
             }

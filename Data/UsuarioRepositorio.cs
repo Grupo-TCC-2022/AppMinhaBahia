@@ -26,6 +26,12 @@ namespace AppMinhaBahia.Data
             return usuario;
         }
 
+        public bool UsuarioExiste(string CPF)
+        {
+            var existe = _context.Usuarios.Any(u => u.CPF == CPF);
+            return existe;
+        }
+
         public async Task ReportarOcorrencia(int usuarioId, Ocorrencia ocorrencia)
         {
             var usuarioAtual = _context.Usuarios.FirstOrDefault(u => u.Id == usuarioId);

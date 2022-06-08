@@ -8,7 +8,7 @@ namespace AppMinhaBahia.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Nome Completo")]
+        [Display(Name = "Nome completo")]
         [MinLength(3,ErrorMessage ="Nome inválido, informe no mínimo 3 caracteres")]
         [MaxLength(50, ErrorMessage = "Nome excedeu o tamanho permitido")]
         [Required(ErrorMessage = "Este campo é obrigatorio")]

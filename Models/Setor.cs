@@ -44,7 +44,6 @@ namespace AppMinhaBahia.Models
             
             Intervencao intervencao = new Intervencao();
             intervencao.Descricao = descricao;
-            intervencao.Ocorrencia = ocorrencia;
             intervencao.Data = DateTime.Today;
 
             int funcionariosNecessarios = (int) ocorrencia.Funcionarios;
