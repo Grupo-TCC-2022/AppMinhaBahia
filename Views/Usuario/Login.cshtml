@@ -7,42 +7,40 @@
 
 <div class="mt-5">
     <div id="layoutAuthentication">
-        <div class="mt-5">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header">
-                                        <h3 class="text-center font-weight-light my-4">Login</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <form asp-controller="Usuario" asp-action="Login" method="post">
-                                            <div class="form-floating mb-3">
-                                                <input asp-for="CPF" class="form-control" placeholder="CPF" />
-                                                <label asp-for="CPF"></label>
-                                                <span asp-validation-for="CPF" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input asp-for="Senha" class="form-control" placeholder="Senha" />
-                                                <label asp-for="Senha"></label>
-                                                <span asp-validation-for="Senha" class="text-danger"></span>
-                                            </div>
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button type="submit" class="btn btn-primary btn-block">Fazer Login</button></div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a asp-controller="Usuario" asp-action="Cadastrar">Não tem uma conta? Faça o cadastro</a></div>
-                                    </div>
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header">
+                                    <h3 class="text-center font-weight-light my-4">Login</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form asp-controller="Usuario" asp-action="Login" method="post">
+                                        <div class="form-floating mb-3">
+                                            <input asp-for="CPF" class="form-control" placeholder="CPF" />
+                                            <label asp-for="CPF"></label>
+                                            <span asp-validation-for="CPF" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input asp-for="Senha" class="form-control" placeholder="Senha" />
+                                            <label asp-for="Senha"></label>
+                                            <span asp-validation-for="Senha" class="text-danger"></span>
+                                        </div>
+                                        <div class="mt-4 mb-0">
+                                            <div class="d-grid"><button type="submit" class="btn btn-primary btn-block">Fazer Login</button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-center py-3">
+                                    <div class="small"><a asp-controller="Usuario" asp-action="Cadastrar">Não tem uma conta? Faça o cadastro</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
         <div id="layoutAuthentication_footer">
             <footer class="py-4 bg-light mt-auto">
