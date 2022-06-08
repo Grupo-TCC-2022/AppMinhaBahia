@@ -42,7 +42,7 @@ namespace AppMinhaBahia.Models
 
             ocorrencia.Status = "Aprovada";
             // TODO: Intervencao
-            return "Ocorrência Aprovada com sucesso.";
+            return "Ocorrência aprovada com sucesso.";
         }
 
         public Requisicao PedirVerba(double valor)
@@ -54,6 +54,7 @@ namespace AppMinhaBahia.Models
             requisicao.Data = DateTime.Today;
             requisicao.Verba = valor;
 
+            this.Prefeitura.Requisicoes.Add(requisicao);
             return requisicao;
         }
 
@@ -66,6 +67,7 @@ namespace AppMinhaBahia.Models
             requisicao.Data = DateTime.Today;
             requisicao.Funcionarios = quantidade;
 
+            this.Prefeitura.Requisicoes.Add(requisicao);
             return requisicao;
         }
     }

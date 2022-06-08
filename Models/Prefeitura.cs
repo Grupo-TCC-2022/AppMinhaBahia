@@ -7,7 +7,9 @@ namespace AppMinhaBahia.Models
     {
         public string NomeCidade { get; set; }
         public ICollection<Setor> Setores { get; set; }
-        public IEnumerable<Requisicao> Requisicoes { get; set; }
+        public ICollection<Requisicao> Requisicoes { get; set; }
+        public double VerbaEstadual { get; set; }
+        public double SalarioMedioPorFuncionario { get; set; }
 
         public void DefinirCusto(int ocorrenciaId, double valor)
         {
@@ -51,6 +53,37 @@ namespace AppMinhaBahia.Models
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
             ocorrencia.Status = "Arquivada";
             return "Ocorrência arquivada com sucesso.";
+        }
+
+        public string ProcessarRequisicao(int requisicaoId)
+        {
+            var requisicao = this.Requisicoes.FirstOrDefault(r => r.Id == requisicaoId);
+
+            if (requisicao.Tipo == "Verba")
+            {
+                if (requisicao.Verba > this.VerbaEstadual)
+                {
+                    return "Verba solicitada excede o recurso estadual.";
+                }
+
+                requisicao.Status = "Aprovada";
+                return "Requisição aprovada com sucesso.";
+            }
+
+            if (requisicao.Tipo == "Contratação")
+            {
+                double custoTotalContratacao = (double) requisicao.Funcionarios * this.SalarioMedioPorFuncionario;
+
+                if (custoTotalContratacao > this.VerbaEstadual)
+                {
+                    return "Contratação solicitada excede o recurso estadual.";
+                }
+
+                requisicao.Status = "Reprovada";
+                return "Requisição aprovada com sucesso.";
+            }
+
+            return "Tipo de requisição não informado.";
         }
     }
 }
