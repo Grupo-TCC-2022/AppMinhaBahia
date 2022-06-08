@@ -4,15 +4,13 @@ using System.Linq;
 
 namespace AppMinhaBahia.Models
 {
-    public class Setor
+    public class Setor : Usuario
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        public string NomeSetor { get; set; }
         public double Verba { get; set; }
         public int PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }
         public List<Funcionario> Funcionarios { get; set; }
-        public ICollection<Ocorrencia> Ocorrencias { get; set; }
         public IEnumerable<Requisicao> Requisicoes { get; set; }
 
         public string AbrirIntervencao(int ocorrenciaId)
@@ -43,6 +41,7 @@ namespace AppMinhaBahia.Models
             }
 
             ocorrencia.Status = "Aprovada";
+            // TODO: Intervencao
             return "Ocorrência Aprovada com sucesso.";
         }
 

@@ -3,12 +3,10 @@ using System.Linq;
 
 namespace AppMinhaBahia.Models
 {
-    public class Prefeitura
+    public class Prefeitura : Usuario
     {
-        public int Id { get; set; }
         public string NomeCidade { get; set; }
         public ICollection<Setor> Setores { get; set; }
-        public ICollection<Ocorrencia> Ocorrencias { get; set; }
         public IEnumerable<Requisicao> Requisicoes { get; set; }
 
         public void DefinirCusto(int ocorrenciaId, double valor)
