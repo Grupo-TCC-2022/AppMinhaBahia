@@ -45,7 +45,7 @@ namespace AppMinhaBahia.Models
             return "Ocorrência aprovada com sucesso.";
         }
 
-        public Requisicao PedirVerba(double valor)
+        public Requisicao SolicitarVerba(double valor)
         {
             Requisicao requisicao = new Requisicao();
             requisicao.Tipo = "Verba";
@@ -58,7 +58,7 @@ namespace AppMinhaBahia.Models
             return requisicao;
         }
 
-        public Requisicao PedirMaisFuncionarios(int quantidade)
+        public Requisicao SolicitarMaisFuncionarios(int quantidade)
         {
             Requisicao requisicao = new Requisicao();
             requisicao.Tipo = "Contratação";

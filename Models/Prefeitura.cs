@@ -85,5 +85,11 @@ namespace AppMinhaBahia.Models
 
             return "Tipo de requisição não informado.";
         }
+
+        /* Como o ambito federal foge do escopo do projeto, o valor será simplesmente adicionado */
+        public void SolicitarVerbaFederal(double valor)
+        {
+            this.VerbaEstadual += valor;
+        }
     }
 }
