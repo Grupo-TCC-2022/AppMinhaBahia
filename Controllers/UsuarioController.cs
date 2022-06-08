@@ -25,7 +25,7 @@ namespace AppMinhaBahia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Cadastrar([Bind("NomeCompleto, CPF, Senha")] Usuario usuario)
+        public async Task<IActionResult> Cadastrar([Bind("NomeCompleto, CPF, NomeCidade, Senha")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
