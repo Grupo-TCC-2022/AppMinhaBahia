@@ -26,6 +26,7 @@ namespace AppMinhaBahia.Data
         {
         }
 
+        /* TODO: Atualizar para carregar junto com a prefeitura suas associações */
         public Prefeitura BuscarPrefeituraPorId(int id)
         {
             var prefeitura = _context.Prefeituras

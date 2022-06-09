@@ -10,6 +10,7 @@ namespace AppMinhaBahia.Models
         [MinLength(3, ErrorMessage ="Informe no mínimo 3 caracteres")]
         [MaxLength(50, ErrorMessage = "Excedeu o tamanho permitido")]
         public string Tipo { get; set; }
+        [Display(Name = "Descrição")]
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         [MinLength(50, ErrorMessage ="Informe no mínimo 50 caracteres")]
         [MaxLength(1000, ErrorMessage = "Excedeu o tamanho permitido")]
@@ -17,9 +18,11 @@ namespace AppMinhaBahia.Models
         public string Descricao { get; set; }
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+        [Display(Name = "Local específico")]
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         public string LocalEspecifico { get; set; }
         public double? Custo { get; set; }
+        [Display(Name = "Funcionários")]
         public int? Funcionarios { get; set; }
         [DataType(DataType.Date)]
         public DateTime Data { get; set; } = DateTime.Now;

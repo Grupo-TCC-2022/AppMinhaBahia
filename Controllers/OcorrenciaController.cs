@@ -46,5 +46,12 @@ namespace AppMinhaBahia.Controllers
             }
             return View(ocorrencia);
         }
+
+        /* TODO: Carregar os detalhes para uma única ocorrência */
+        /* ANTES: Implementar o repositorio de ocorrência */
+        public IActionResult Detalhes()
+        {
+            return View();
+        }
     }
 }

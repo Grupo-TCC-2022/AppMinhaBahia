@@ -26,5 +26,11 @@ namespace AppMinhaBahia.Data
             
             return _context.Ocorrencias.Include(o => o.Intervencao).Include(o => o.Prefeitura).Include(o => o.Usuario).ThenInclude(u => u.Cidade).Where(o => o.Status == status).ToList();
         }
+
+        /* TODO: Carregar uma ocorrência para um dado id */
+        public Ocorrencia BuscarOcorrenciaPorId(int id)
+        {
+            return new Ocorrencia();
+        }
     }
 }

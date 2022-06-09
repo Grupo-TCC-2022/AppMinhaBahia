@@ -34,7 +34,7 @@ namespace AppMinhaBahia.Controllers
         }
 
         /* TODO: Carregar os detalhes para uma única prefeitura */
-        /* ANTES: Implementar o repositorio de prefeitura */
+        /* ANTES: Atualizar o repositorio de prefeitura para incluir as associações do objeto */
         public IActionResult Detalhes()
         {
             return View();
