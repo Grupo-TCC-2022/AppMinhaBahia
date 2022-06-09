@@ -14,23 +14,25 @@
     <div class="card-body">
         @if (Model.Count() > 0)
         {
-            <table id="tabela" class="table">
+            <table id="tabela">
                 <thead>
                     <tr>
                         <th>UF</th>
                         <th>Verba municipal</th>
                         <th>Salario médio por funcionário</th>
                         <th>Ocorrências</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var prefeitura in Model)
                     {
                         <tr>
-                            <th>@prefeitura.UF.NomeUF</th>
-                            <th>@prefeitura.VerbaMunicipal</th>
-                            <th>@prefeitura.SalarioMedioPorFuncionario</th>
-                            <th>@prefeitura.Ocorrencias.Count()</th>
+                            <td>@prefeitura.UF.NomeUF</td>
+                            <td>@prefeitura.VerbaMunicipal</td>
+                            <td>@prefeitura.SalarioMedioPorFuncionario</td>
+                            <td>@prefeitura.Ocorrencias.Count()</td>
+                            <td><a asp-controller="Prefeitura" asp-action="Detalhes">Detalhes</a></td>
                         </tr>
                     }
                 </tbody>

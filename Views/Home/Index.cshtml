@@ -62,23 +62,25 @@
             <div class="card-body">
                 @if (admin.Requisicoes.Count() > 0)
                 {
-                    <table id="tabelaDeOcorrencias" class="table">
+                    <table id="tabela">
                         <thead>
                             <tr>
                                 <th>Tipo</th>
                                 <th>Cidade</th>
                                 <th>Setor</th>
                                 <th>Criação</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var requisicao in admin.Requisicoes)
                             {
                                 <tr>
-                                    <th>@requisicao.Tipo</th>
-                                    <th>@requisicao.Prefeitura.Cidade.Nome</th>
-                                    <th>@requisicao.Setor.NomeSetor</th>
-                                    <th>@requisicao.Data</th>
+                                    <td>@requisicao.Tipo</td>
+                                    <td>@requisicao.Prefeitura.Cidade.Nome</td>
+                                    <td>@requisicao.Setor.NomeSetor</td>
+                                    <td>@requisicao.Data</td>
+                                    <td><a asp-controller="Requisicao" asp-action="Detalhes">Detalhes</a></td>
                                 </tr>
                             }
                         </tbody>

@@ -14,7 +14,7 @@
     <div class="card-body">
         @if (Model.Count() > 0)
         {
-            <table id="tabela" class="table">
+            <table id="tabela">
                 <thead>
                     <tr>
                         <th>Tipo</th>
@@ -22,17 +22,19 @@
                         <th>Criação</th>
                         <th>Cidade</th>
                         <th>Dono</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var ocorrencia in Model)
                     {
                         <tr>
-                            <th>@ocorrencia.Tipo</th>
-                            <th>@ocorrencia.LocalEspecifico</th>
-                            <th>@ocorrencia.Data</th>
-                            <th>@ocorrencia.Usuario.Cidade.Nome</th>
-                            <th>@ocorrencia.Usuario.NomeCompleto</th>
+                            <td>@ocorrencia.Tipo</td>
+                            <td>@ocorrencia.LocalEspecifico</td>
+                            <td>@ocorrencia.Data</td>
+                            <td>@ocorrencia.Usuario.Cidade.Nome</td>
+                            <td>@ocorrencia.Usuario.NomeCompleto</td>
+                            <td><a asp-controller="Ocorrencia" asp-action="Detalhes">Detalhes</a></td>
                         </tr>
                     }
                 </tbody>
