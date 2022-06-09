@@ -20,6 +20,11 @@ namespace AppMinhaBahia.Data
             .Include(a => a.Prefeituras)
             .ThenInclude(p => p.Cidade)
             .Include(a => a.Requisicoes)
+            .ThenInclude(r => r.Prefeitura)
+            .ThenInclude(p => p.Cidade)
+            .Include(a => a.Requisicoes)
+            .ThenInclude(r => r.Setor)
+            .ThenInclude(s => s.Cidade)
             .FirstOrDefault(a => a.Id == id);
             return admin;
         }

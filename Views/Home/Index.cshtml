@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Página Inicial";
     Layout = "_LayoutLateral";
-    string tipoUsuario = User.FindFirst("tipo").Value;
 }
 
 @if (User.Identity.IsAuthenticated)
 {
+    string tipoUsuario = User.FindFirst("tipo").Value;
     @if (tipoUsuario == "comum")
     {
         <h1 class="mt-4">Ocorrências</h1>

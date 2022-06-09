@@ -8,9 +8,9 @@ namespace AppMinhaBahia.Models
         public int Id { get; set; }
         // Verba ou Contratação
         public string Tipo { get; set; }
-        public int SetorId { get; set; }
+        public int? SetorId { get; set; }
         public Setor Setor { get; set; }
-        public int PrefeituraId { get; set; }
+        public int? PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }
         [DataType(DataType.Date)]
         public DateTime Data { get; set; } = DateTime.Now;
