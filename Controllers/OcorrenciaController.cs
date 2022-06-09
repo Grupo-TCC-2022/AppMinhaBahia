@@ -53,5 +53,13 @@ namespace AppMinhaBahia.Controllers
         {
             return View();
         }
+
+        /* TODO: Carregar as ocorrências especificas do usuário logado */
+        /* ANTES: Implementar o repositorio de ocorrência */
+        /* DICA: O método index já carrega todas, mas de forma geral */
+        public IActionResult OcorrenciasDoUsuario()
+        {
+            return View();
+        }
     }
 }
