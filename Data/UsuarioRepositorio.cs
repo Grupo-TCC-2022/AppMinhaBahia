@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AppMinhaBahia.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppMinhaBahia.Data
 {
@@ -21,13 +22,13 @@ namespace AppMinhaBahia.Data
 
         public Usuario BuscarUsuarioPorCPF(string CPF)
         {
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.CPF == CPF);
+            var usuario = _context.Usuarios.Include(u => u.Cidade).FirstOrDefault(u => u.CPF == CPF);
             return usuario;
         }
 
         public Usuario BuscarUsuarioPorId(int id)
         {
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.Id == id);
+            var usuario = _context.Usuarios.Include(u => u.Cidade).FirstOrDefault(u => u.Id == id);
             return usuario;
         }
 

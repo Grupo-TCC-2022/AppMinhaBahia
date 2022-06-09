@@ -10,6 +10,6 @@ namespace AppMinhaBahia.Models
         public string Descricao { get; set; }
         public ICollection<Funcionario> FuncionariosAlocados { get; set; }
         [DataType(DataType.Date)]
-        public DateTime Data { get; set; }
+        public DateTime Data { get; set; } = DateTime.Now;
     }
 }

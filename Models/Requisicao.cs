@@ -13,7 +13,7 @@ namespace AppMinhaBahia.Models
         public int PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }
         [DataType(DataType.Date)]
-        public DateTime Data { get; set; }
+        public DateTime Data { get; set; } = DateTime.Now;
         public double? Verba { get; set; }
         public int? Funcionarios { get; set; }
         // Em analize, Aprovada ou Reprovada

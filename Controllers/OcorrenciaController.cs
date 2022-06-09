@@ -40,7 +40,7 @@ namespace AppMinhaBahia.Controllers
                 ocorrencia.Prefeitura = prefeitura;
 
                 await _repositorio.Criar(ocorrencia);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             return View(ocorrencia);
         }

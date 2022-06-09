@@ -6,58 +6,46 @@
 }
 
 <div id="layoutAuthentication">
-    <div class="mt-5">
-        <div id="layoutAuthentication_content">
-            <main>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-7">
-                            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Cadastrar</h3>
-                                </div>
-                                <div class="card-body">
-                                    <form asp-controller="Ocorrencia" asp-action="Criar" method="post">
-                                        <div class="form-floating mb-3">
-                                            <input asp-for="Tipo" class="form-control" placeholder="Tipo" />
-                                            <label asp-for="Tipo"></label>
-                                            <span class="text-alert">Exemplos: Violência - Saúde - Educação</span>
-                                            <span asp-validation-for="Tipo" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input asp-for="Descricao" class="form-control" placeholder="Descrição" />
-                                            <label asp-for="Descricao"></label>
-                                            <span asp-validation-for="Descricao" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input asp-for="LocalEspecifico" class="form-control" placeholder="Local Específico" />
-                                            <label asp-for="LocalEspecifico"></label>
-                                            <span asp-validation-for="LocalEspecifico" class="text-danger"></span>
-                                        </div>
-                                        <div class="mt-4 mb-0">
-                                            <div class="d-grid"><button type="submit" class="btn btn-primary btn-block">Registrar</button></div>
-                                        </div>
-                                    </form>
-                                </div>
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header">
+                                <h3 class="text-center font-weight-light my-4">Reportar ocorrência</h3>
+                            </div>
+                            <div class="card-body">
+                                <form asp-controller="Ocorrencia" asp-action="Criar" method="post">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Tipo" class="form-control" placeholder="Tipo" />
+                                        <label asp-for="Tipo"></label>
+                                        <span class="text-info">Exemplos: Violência - Saúde - Educação</span>
+                                        <span asp-validation-for="Tipo" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <textarea asp-for="Descricao" class="form-control" placeholder="Descrição"
+                                            style="height: 200px;">
+                                            </textarea>
+                                        <label asp-for="Descricao"></label>
+                                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="LocalEspecifico" class="form-control"
+                                            placeholder="Local Específico" />
+                                        <label asp-for="LocalEspecifico"></label>
+                                        <span asp-validation-for="LocalEspecifico" class="text-danger"></span>
+                                    </div>
+                                    <div class="mt-4 mb-0">
+                                        <div class="d-grid"><button type="submit"
+                                                class="btn btn-primary btn-block">Reportar</button></div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
-    </div>
-    <div id="layoutAuthentication_footer">
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Minha Bahia 2022</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
-                </div>
             </div>
-        </footer>
+        </main>
     </div>
 </div>

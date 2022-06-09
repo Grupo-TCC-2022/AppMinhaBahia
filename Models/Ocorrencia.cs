@@ -13,6 +13,7 @@ namespace AppMinhaBahia.Models
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         [MinLength(50, ErrorMessage ="Informe no mínimo 50 caracteres")]
         [MaxLength(1000, ErrorMessage = "Excedeu o tamanho permitido")]
+        [DataType(DataType.MultilineText)]
         public string Descricao { get; set; }
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
@@ -21,7 +22,7 @@ namespace AppMinhaBahia.Models
         public double? Custo { get; set; }
         public int? Funcionarios { get; set; }
         [DataType(DataType.Date)]
-        public DateTime Data { get; set; } = DateTime.Today;
+        public DateTime Data { get; set; } = DateTime.Now;
         public int? IntervencaoId { get; set; }
         public Intervencao Intervencao { get; set; }
         public int PrefeituraId { get; set; }
