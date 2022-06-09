@@ -42,6 +42,8 @@ namespace AppMinhaBahia
             services.AddScoped<CidadeRepositorio>();
             services.AddScoped<OcorrenciaRepositorio>();
             services.AddScoped<PrefeituraRepositorio>();
+            services.AddScoped<UFAdminRepositorio>();
+            services.AddScoped<FuncionarioRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

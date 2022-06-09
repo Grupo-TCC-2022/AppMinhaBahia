@@ -17,11 +17,6 @@ namespace AppMinhaBahia.Models
         public double? Verba { get; set; }
         public int? Funcionarios { get; set; }
         // Em analize, Aprovada ou Reprovada
-        public string Status { get; set; }
-
-        public Requisicao()
-        {
-            this.Status = "Em analize";
-        }
+        public string Status { get; set; } = "Em analize";
     }
 }

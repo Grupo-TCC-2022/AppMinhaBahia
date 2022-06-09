@@ -1,53 +1,97 @@
-﻿@{
+﻿@model AppMinhaBahia.Models.Usuario
+
+@{
     ViewData["Title"] = "Página Inicial";
     Layout = "_LayoutLateral";
+    string tipoUsuario = User.FindFirst("tipo").Value;
 }
 
 @if (User.Identity.IsAuthenticated)
 {
-    <h1 class="mt-4">Ocorrências</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Ocorrências</li>
-    </ol>
-    <div class="row">
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="card-body">Em analize</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" asp-controller="Ocorrencia" asp-action="Index" asp-route-status="Em analize">Ver detalhes</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+    @if (tipoUsuario == "comum")
+    {
+        <h1 class="mt-4">Ocorrências</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Ocorrências</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Em analize</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" asp-controller="Ocorrencia" asp-action="Index" asp-route-status="Em analize">Ver detalhes</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">Encaminhadas</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" asp-controller="Ocorrencia" asp-action="Index" asp-route-status="Encaminhada">Ver detalhes</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Aprovadas</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" asp-controller="Ocorrencia" asp-action="Index" asp-route-status="Aprovada">Ver detalhes</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Arquivadas</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" asp-controller="Ocorrencia" asp-action="Index" asp-route-status="Arquivada">Ver detalhes</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-warning text-white mb-4">
-                <div class="card-body">Encaminhadas</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" asp-controller="Ocorrencia" asp-action="Index" asp-route-status="Encaminhada">Ver detalhes</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
+        <a asp-controller="Ocorrencia" asp-action="Criar" type="button" class="btn btn-primary">Nova ocorrência</a>
+    }
+    else if (tipoUsuario == "admin")
+    {
+        UFAdmin admin = (UFAdmin) Model;
+
+        <h1 class="mt-4">Requisições</h1>
+        <div class="card mb-4">
+            <div class="card-body">
+                @if (admin.Requisicoes.Count() > 0)
+                {
+                    <table id="tabelaDeOcorrencias" class="table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Cidade</th>
+                                <th>Setor</th>
+                                <th>Criação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var requisicao in admin.Requisicoes)
+                            {
+                                <tr>
+                                    <th>@requisicao.Tipo</th>
+                                    <th>@requisicao.Prefeitura.Cidade.Nome</th>
+                                    <th>@requisicao.Setor.NomeSetor</th>
+                                    <th>@requisicao.Data</th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h3>Nenhuma requisição registrada</h3>
+                }
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-success text-white mb-4">
-                <div class="card-body">Aprovadas</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" asp-controller="Ocorrencia" asp-action="Index" asp-route-status="Aprovada">Ver detalhes</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-danger text-white mb-4">
-                <div class="card-body">Arquivadas</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" asp-controller="Ocorrencia" asp-action="Index" asp-route-status="Arquivada">Ver detalhes</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a asp-controller="Ocorrencia" asp-action="Criar" type="button" class="btn btn-primary">Nova ocorrência</a>
+    }
 }
 else
 {

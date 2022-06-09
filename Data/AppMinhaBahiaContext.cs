@@ -21,6 +21,7 @@ namespace AppMinhaBahia.Data
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<Ocorrencia> Ocorrencias { get; set; }
         public DbSet<UFAdmin> Administradores { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
