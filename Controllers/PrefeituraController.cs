@@ -33,6 +33,13 @@ namespace AppMinhaBahia.Controllers
             return View();
         }
 
+        /* TODO: Carregar os detalhes para uma única prefeitura */
+        /* ANTES: Implementar o repositorio de prefeitura */
+        public IActionResult Detalhes()
+        {
+            return View();
+        }
+
         public IActionResult Criar()
         {
             return View();
