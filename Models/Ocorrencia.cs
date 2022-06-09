@@ -13,7 +13,7 @@ namespace AppMinhaBahia.Models
         public double? Custo { get; set; }
         public int? Funcionarios { get; set; }
         public DateTime Data { get; set; }
-        public int IntervencaoId { get; set; }
+        public int? IntervencaoId { get; set; }
         public Intervencao Intervencao { get; set; }
         public int PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }

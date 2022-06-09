@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AppMinhaBahia.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppMinhaBahia.Data
 {
@@ -13,9 +14,10 @@ namespace AppMinhaBahia.Data
             _context = context;
         }
 
-        public IEnumerable<Ocorrencia> ListaDeOcorrencias(string status)
+        public IEnumerable<Ocorrencia> ColecaoDeOcorrencias(string status)
         {
-            return _context.Ocorrencias.Where(o => o.Status == status).ToList();
+            
+            return _context.Ocorrencias.Include(o => o.Intervencao).Include(o => o.Prefeitura).Include(o => o.Usuario).ThenInclude(u => u.Cidade).Where(o => o.Status == status).ToList();
         }
     }
 }

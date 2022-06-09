@@ -15,7 +15,7 @@ namespace AppMinhaBahia.Controllers
 
         public IActionResult Index(string status)
         {
-            return View(_repositorio.ListaDeOcorrencias(status));
+            return View(_repositorio.ColecaoDeOcorrencias(status));
         }
     }
 }

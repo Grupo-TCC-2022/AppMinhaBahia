@@ -84,9 +84,15 @@ namespace AppMinhaBahia.Controllers
         {
             var usuario = _repositorio.BuscarUsuarioPorCPF(CPF);
             
-            if (usuario == null)
+            if (CPF == null)
             {
                 ModelState.AddModelError("CPF", "Este campo é obrigatorio");
+                return View(usuario);
+            }
+
+            if (usuario == null)
+            {
+                ModelState.AddModelError("CPF", "Usuário não encontrado");
                 return View(usuario);
             }
 
