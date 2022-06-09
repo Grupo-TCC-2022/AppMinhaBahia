@@ -22,15 +22,18 @@ namespace AppMinhaBahia.Data
         }
 
         public IEnumerable<Ocorrencia> ColecaoDeOcorrencias(string status)
-        {
-            
+        {    
             return _context.Ocorrencias.Include(o => o.Intervencao).Include(o => o.Prefeitura).Include(o => o.Usuario).ThenInclude(u => u.Cidade).Where(o => o.Status == status).ToList();
         }
-
-        /* TODO: Carregar uma ocorrência para um dado id */
+        
+        public IEnumerable<Ocorrencia> OcorrenciasDoUsuario(int id)
+        {    
+            return _context.Ocorrencias.Where(o => o.Id == id).Include(o => o.Intervencao).Include(o => o.Prefeitura).Include(o => o.Usuario).ThenInclude(u => u.Cidade).ToList();
+        }
+        /* Carregar uma ocorrência para um dado id */
         public Ocorrencia BuscarOcorrenciaPorId(int id)
         {
-            return new Ocorrencia();
+            return _context.Ocorrencias.FirstOrDefault(o => o.Id == id);
         }
     }
 }

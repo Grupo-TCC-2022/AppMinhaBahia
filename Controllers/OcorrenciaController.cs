@@ -47,19 +47,29 @@ namespace AppMinhaBahia.Controllers
             return View(ocorrencia);
         }
 
-        /* TODO: Carregar os detalhes para uma única ocorrência */
+        /* Carregar os detalhes para uma única ocorrência */
         /* ANTES: Implementar o repositorio de ocorrência */
-        public IActionResult Detalhes()
+        public IActionResult Detalhes(int id)
         {
-            return View();
+            if(id == null){
+                return NotFound();
+            }
+            var ocorrencia = _repositorio.BuscarOcorrenciaPorId(id);
+
+            return View(ocorrencia);
         }
 
         /* TODO: Carregar as ocorrências especificas do usuário logado */
         /* ANTES: Implementar o repositorio de ocorrência */
         /* DICA: O método index já carrega todas, mas de forma geral */
-        public IActionResult OcorrenciasDoUsuario()
+        public IActionResult OcorrenciasDoUsuario(string status)
         {
-            return View();
+            int usuarioId = Int32.Parse(User.FindFirst("id").Value);
+            if(status == "" || status == null){
+                return NotFound();
+            }
+            var ocorrencias = _repositorio.OcorrenciasDoUsuario(usuarioId);
+            return View(ocorrencias);
         }
     }
 }

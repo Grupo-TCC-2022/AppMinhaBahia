@@ -31,6 +31,6 @@ namespace AppMinhaBahia.Models
         public int PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }
         // Em analize, Encaminhada, Aprovada ou Arquivada
-        public string Status { get; set; } = "Em analize";
+        public string Status { get; set; } = "Em análise";
     }
 }

@@ -15,23 +15,27 @@ namespace AppMinhaBahia.Data
             _context = context;
         }
 
-        /* TODO: Carregar todas as prefeituras para a UF */
+        /* Carregar todas as prefeituras para a UF */
         public IEnumerable<Prefeitura> CarregarPrefeituras(int UFId)
         {
-            return new List<Prefeitura>();
+            return _context.Prefeituras.Include(p => p.UF).Include(p => p.Setores).Include(p => p.Requisicoes).ToList();
         }
 
-        /* TODO: Criar nova prefeitura para a UF */
+        /* Criar nova prefeitura para a UF */
         public async Task Criar(Prefeitura prefeitura)
         {
+            _context.Add(prefeitura);
+            await _context.SaveChangesAsync();
         }
 
-        /* TODO: Atualizar para carregar junto com a prefeitura suas associações */
+        /* Atualizar para carregar junto com a prefeitura suas associações */
         public Prefeitura BuscarPrefeituraPorId(int id)
         {
             var prefeitura = _context.Prefeituras
             .Include(p => p.Setores)
+            .ThenInclude(p => p.Prefeitura).ThenInclude(p => p.Requisicoes)
             .Include(p => p.Requisicoes)
+            .ThenInclude(p => p.Setor).ThenInclude(p => p.Prefeitura)
             .FirstOrDefault(p => p.Id == id);
             return prefeitura;
         }

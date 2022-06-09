@@ -15,18 +15,20 @@ namespace AppMinhaBahia.Models
         [Display(Name = "Salario médio por funcionário")]
         public double SalarioMedioPorFuncionario { get; set; } = 1.212; /* Salario mínimo */
 
+
+        //Definir custo da ocorrencia
         public void DefinirCusto(int ocorrenciaId, double valor)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
             ocorrencia.Custo = valor;
         }
-
+        //Define numero necessario de funcionário
         public void DefinirFuncionarios(int ocorrenciaId, int numeroDeFuncionarios)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
             ocorrencia.Funcionarios = numeroDeFuncionarios;
         }
-
+        //Encaminha ocorrencia
         public Dictionary<string, string> EncaminharOcorrencia(int ocorrenciaId, int setorId)
         {
             var ocorrencia = this.Ocorrencias.FirstOrDefault(o => o.Id == ocorrenciaId);
@@ -87,12 +89,13 @@ namespace AppMinhaBahia.Models
                 if (requisicao.Verba > this.VerbaMunicipal)
                 {
                     situacao.Add("status", "erro");
-                    situacao.Add("mensagem", "Verba solicitada excede o recurso estadual");
+                    situacao.Add("mensagem", "Verba solicitada excede o recurso municipal");
                     return situacao;
                 }
 
                 requisicao.Status = "Aprovada";
                 requisicao.Setor.Verba += (double) requisicao.Verba;
+                this.VerbaMunicipal -= (double)requisicao.Verba;
                 situacao.Add("status", "sucesso");
                 situacao.Add("mensagem", "Requisição aprovada");
                 return situacao;
@@ -105,11 +108,11 @@ namespace AppMinhaBahia.Models
                 if (custoTotalContratacao > this.VerbaMunicipal)
                 {
                     situacao.Add("status", "erro");
-                    situacao.Add("mensagem", "Contratação solicitada excede o recurso estadual");
+                    situacao.Add("mensagem", "Contratação solicitada excede o recurso municipal");
                     return situacao;
                 }
                 
-                requisicao.Status = "Reprovada";
+  
                 // Forma inadequada de implementar, so existe para não fugirmos do escopo simplex desse projeto
                 Random random = new Random();
                 for (int i = 0; i < requisicao.Funcionarios; i++)
@@ -130,7 +133,7 @@ namespace AppMinhaBahia.Models
             return situacao;
         }
 
-        public Requisicao SolicitarVerbaEstadual(double valor)
+        public void SolicitarVerbaEstadual(double valor)
         {
             Requisicao requisicao = new Requisicao();
             requisicao.Tipo = "Verba";
@@ -139,7 +142,6 @@ namespace AppMinhaBahia.Models
             requisicao.Verba = valor;
 
             this.UF.Requisicoes.Add(requisicao);
-            return requisicao;
         }
     }
 }
