@@ -37,13 +37,14 @@ namespace AppMinhaBahia.Data
             );
 
             /* Criar Admin */
-            builder.Entity<UFAdmin>().HasData(
-                new UFAdmin {
-                    CPF = "12345678910",
-                    NomeCompleto = "Rui Costa",
-                    Senha = "1234567910"
-                }
-            );
+            Usuario admin = new UFAdmin {
+                Id = Int32.MaxValue,
+                CPF = "12345678910",
+                NomeCompleto = "Rui Costa",
+                Senha = "12345678910"
+            };
+
+            builder.Entity<UFAdmin>().HasData(admin);
         }
     }
 }

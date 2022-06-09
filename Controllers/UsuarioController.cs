@@ -80,7 +80,7 @@ namespace AppMinhaBahia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(string CPF, string Senha)
+        public async Task<IActionResult> Login(string CPF, string senha)
         {
             var usuario = _repositorio.BuscarUsuarioPorCPF(CPF);
             
@@ -96,16 +96,18 @@ namespace AppMinhaBahia.Controllers
                 return View(usuario);
             }
 
-            if (usuario.Senha != Senha)
+            if (usuario.Senha != senha)
             {
                 ModelState.AddModelError("Senha", "Senha invalida");
                 return View(usuario);
             }
-
+            
+            string tipoUsuario = VerificarTipoUsuario(usuario);
             List<Claim> direitosAcesso = new List<Claim>{
-                new Claim("id", usuario.Id.ToString())
+                new Claim("id", usuario.Id.ToString()),
+                new Claim("tipo", tipoUsuario)
             };
-
+            
             var identidade = new ClaimsIdentity(direitosAcesso, "Identity.Login");
             var usuarioPrincipal = new ClaimsPrincipal(new[] { identidade });
 
@@ -129,6 +131,28 @@ namespace AppMinhaBahia.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(ocorrencia);
+        }
+
+        public string VerificarTipoUsuario(Usuario usuario)
+        {
+            if (usuario is Setor)
+            {
+                return "setor";
+            }
+            else if (usuario is Prefeitura)
+            {
+                return "prefeitura";
+            }
+            else if (usuario is Funcionario)
+            {
+                return "funcionario";
+            }
+            else if (usuario is UFAdmin)
+            {
+                return "admin";
+            }
+
+            return "comum";
         }
     }
 }

@@ -10,11 +10,13 @@ namespace AppMinhaBahia.Controllers
     {
         private readonly OcorrenciaRepositorio _repositorio;
         private readonly UsuarioRepositorio _usuarioRepositorio;
+        private readonly PrefeituraRepositorio _prefeituraRepositorio;
 
-        public OcorrenciaController(OcorrenciaRepositorio repositorio, UsuarioRepositorio usuarioRepositorio)
+        public OcorrenciaController(OcorrenciaRepositorio repositorio, UsuarioRepositorio usuarioRepositorio, PrefeituraRepositorio prefeituraRepositorio)
         {
             _repositorio = repositorio;
             _usuarioRepositorio = usuarioRepositorio;
+            _prefeituraRepositorio = prefeituraRepositorio;
         }
 
         public IActionResult Index(string status)
@@ -36,7 +38,7 @@ namespace AppMinhaBahia.Controllers
                 int usuarioId = Int32.Parse(User.FindFirst("id").Value);
                 var usuario = _usuarioRepositorio.BuscarUsuarioPorId(usuarioId);
                 ocorrencia.Usuario = usuario;
-                var prefeitura = _usuarioRepositorio.BuscarPrefeituraPorCidade(usuario.Cidade.Nome);
+                var prefeitura = _prefeituraRepositorio.BuscarPrefeituraPorCidade(usuario.Cidade.Nome);
                 ocorrencia.Prefeitura = prefeitura;
 
                 await _repositorio.Criar(ocorrencia);

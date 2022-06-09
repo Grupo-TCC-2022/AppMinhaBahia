@@ -32,12 +32,6 @@ namespace AppMinhaBahia.Data
             return usuario;
         }
 
-        public Prefeitura BuscarPrefeituraPorCidade(string cidade)
-        {
-            var prefeitura = _context.Prefeituras.FirstOrDefault(p => p.Cidade.Nome == cidade);
-            return prefeitura;
-        }
-
         public bool UsuarioExiste(string CPF)
         {
             var existe = _context.Usuarios.Any(u => u.CPF == CPF);
