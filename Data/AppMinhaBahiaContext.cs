@@ -39,10 +39,10 @@ namespace AppMinhaBahia.Data
 
             /* Criar Admin */
             Usuario admin = new UFAdmin {
-                Id = Int32.MaxValue,
-                CPF = "12345678910",
+                Id = Int32.MaxValue - 1,
+                CPF = "admin",
                 NomeCompleto = "Rui Costa",
-                Senha = "12345678910"
+                Senha = "admin"
             };
 
             builder.Entity<UFAdmin>().HasData(admin);
