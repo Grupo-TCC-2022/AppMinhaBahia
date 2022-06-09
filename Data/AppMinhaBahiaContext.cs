@@ -20,6 +20,7 @@ namespace AppMinhaBahia.Data
         public DbSet<Prefeitura> Prefeituras { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<Ocorrencia> Ocorrencias { get; set; }
+        public DbSet<UFAdmin> Administradores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -33,6 +34,15 @@ namespace AppMinhaBahia.Data
                     Id = index + 1,
                     Nome = nomeCidade
                 })
+            );
+
+            /* Criar Admin */
+            builder.Entity<UFAdmin>().HasData(
+                new UFAdmin {
+                    CPF = "12345678910",
+                    NomeCompleto = "Rui Costa",
+                    Senha = "1234567910"
+                }
             );
         }
     }
