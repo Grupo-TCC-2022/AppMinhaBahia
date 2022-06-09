@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppMinhaBahia.Models
 {
@@ -11,6 +12,7 @@ namespace AppMinhaBahia.Models
         public Setor Setor { get; set; }
         public int PrefeituraId { get; set; }
         public Prefeitura Prefeitura { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Data { get; set; }
         public double? Verba { get; set; }
         public int? Funcionarios { get; set; }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AppMinhaBahia.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,12 @@ namespace AppMinhaBahia.Data
         public OcorrenciaRepositorio(AppMinhaBahiaContext context)
         {
             _context = context;
+        }
+
+        public async Task Criar(Ocorrencia ocorrencia)
+        {
+            _context.Add(ocorrencia);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Ocorrencia> ColecaoDeOcorrencias(string status)

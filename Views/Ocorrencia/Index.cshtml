@@ -1,7 +1,7 @@
 @model IEnumerable<AppMinhaBahia.Models.Ocorrencia>
 
 @{
-    ViewData["Title"] = "Página Inicial";
+    ViewData["Title"] = "Ocorrências";
     Layout = "_LayoutLateral";
 }
 
@@ -18,7 +18,6 @@
                 <thead>
                     <tr>
                         <th>Tipo</th>
-                        <th>Descrição</th>
                         <th>Local Especifico</th>
                         <th>Criação</th>
                         <th>Cidade</th>
@@ -30,7 +29,6 @@
                     {
                         <tr>
                             <th>@ocorrencia.Tipo</th>
-                            <th>@ocorrencia.Descricao</th>
                             <th>@ocorrencia.LocalEspecifico</th>
                             <th>@ocorrencia.Data</th>
                             <th>@ocorrencia.Usuario.Cidade.Nome</th>

@@ -9,7 +9,7 @@ namespace AppMinhaBahia.Models
         [Key]
         public int Id { get; set; }
         [Display(Name = "Nome completo")]
-        [MinLength(3,ErrorMessage ="Nome inválido, informe no mínimo 3 caracteres")]
+        [MinLength(3, ErrorMessage ="Nome inválido, informe no mínimo 3 caracteres")]
         [MaxLength(50, ErrorMessage = "Nome excedeu o tamanho permitido")]
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         public string NomeCompleto { get; set; }
@@ -18,7 +18,7 @@ namespace AppMinhaBahia.Models
         [Display(Name = "Nome da cidade")]
         public Cidade Cidade { get; set; }
         [DataType(DataType.Password)]
-        [MinLength(3,ErrorMessage ="Senha inválida, informe no mínimo 3 caracteres")]
+        [MinLength(3, ErrorMessage ="Senha inválida, informe no mínimo 3 caracteres")]
         [MaxLength(50, ErrorMessage = "Senha excedeu o tamanho permitido")]
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         public string Senha { get; set; }
@@ -26,8 +26,6 @@ namespace AppMinhaBahia.Models
 
         public void ReportarOcorrencia(Ocorrencia ocorrencia, Prefeitura prefeitura)
         {   
-            ocorrencia.Data = DateTime.Today;
-            
             prefeitura.Ocorrencias.Add(ocorrencia);
             this.Ocorrencias.Add(ocorrencia);
         }
