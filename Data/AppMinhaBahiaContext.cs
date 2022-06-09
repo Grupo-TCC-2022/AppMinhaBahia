@@ -42,7 +42,8 @@ namespace AppMinhaBahia.Data
                 Id = Int32.MaxValue - 1,
                 CPF = "admin",
                 NomeCompleto = "Rui Costa",
-                Senha = "admin"
+                Senha = "admin",
+                NomeUF = "Bahia"
             };
 
             builder.Entity<UFAdmin>().HasData(admin);

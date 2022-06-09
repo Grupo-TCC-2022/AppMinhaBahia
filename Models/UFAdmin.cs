@@ -6,6 +6,7 @@ namespace AppMinhaBahia.Models
 {
     public class UFAdmin : Usuario
     {
+        public string NomeUF { get; set; }
         public ICollection<Prefeitura> Prefeituras { get; set; }
         public ICollection<Requisicao> Requisicoes { get; set; }
         public double VerbaEstadual { get; set; } = Double.MaxValue;

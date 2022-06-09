@@ -12,12 +12,16 @@ $(document).ready(function () {
             for (var i = 0, len = data.length; i < len; i++){
                 listaNomeCidade.push(data[i].nome);
             }
-            $('#NomeCidadeAutoCompletar').autocomplete({
-                source: listaNomeCidade,
-                minLenght: 3
-            })
+            let nomeCidadeAutoCompletar = $('#NomeCidadeAutoCompletar');
+
+            if (nomeCidadeAutoCompletar != null){
+                nomeCidadeAutoCompletar.autocomplete({
+                    source: listaNomeCidade,
+                    minLenght: 3
+                })
+            }
         });
     });
 
-    $('#tabelaDeOcorrencias').DataTable();
+    $('#tabela').DataTable();
 });

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AppMinhaBahia.Models;
@@ -12,6 +13,17 @@ namespace AppMinhaBahia.Data
         public PrefeituraRepositorio(AppMinhaBahiaContext context)
         {
             _context = context;
+        }
+
+        /* TODO: Carregar todas as prefeituras para a UF */
+        public IEnumerable<Prefeitura> CarregarPrefeituras(int UFId)
+        {
+            return new List<Prefeitura>();
+        }
+
+        /* TODO: Criar nova prefeitura para a UF */
+        public async Task Criar(Prefeitura prefeitura)
+        {
         }
 
         public Prefeitura BuscarPrefeituraPorId(int id)

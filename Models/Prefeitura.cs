@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace AppMinhaBahia.Models
@@ -9,8 +10,10 @@ namespace AppMinhaBahia.Models
         public UFAdmin UF { get; set; }
         public ICollection<Setor> Setores { get; set; }
         public ICollection<Requisicao> Requisicoes { get; set; }
-        public double VerbaMunicipal { get; set; }
-        public double SalarioMedioPorFuncionario { get; set; }
+        [Display(Name = "Verba municipal")]
+        public double VerbaMunicipal { get; set; } = 0;
+        [Display(Name = "Salario médio por funcionário")]
+        public double SalarioMedioPorFuncionario { get; set; } = 1.212; /* Salario mínimo */
 
         public void DefinirCusto(int ocorrenciaId, double valor)
         {
@@ -108,7 +111,6 @@ namespace AppMinhaBahia.Models
                 
                 requisicao.Status = "Reprovada";
                 // Forma inadequada de implementar, so existe para não fugirmos do escopo simplex desse projeto
-                // TODO: Implementar um seeder que coloque valores mais reais
                 Random random = new Random();
                 for (int i = 0; i < requisicao.Funcionarios; i++)
                 {
