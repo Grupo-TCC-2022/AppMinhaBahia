@@ -1,70 +1,55 @@
 @model AppMinhaBahia.Models.Usuario
 
 @{
+    Layout = "_LayoutAutenticacao";
     ViewData["Title"] = "Cadastrar";
-    Layout = "_Layout";
 }
 
-<div id="layoutAuthentication">
-    <div class="mt-5">
-        <div id="layoutAuthentication_content">
-            <main>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-7">
-                            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Cadastrar</h3>
-                                </div>
-                                <div class="card-body">
-                                    <form asp-controller="Usuario" asp-action="Cadastrar" method="post">
-                                        <div class="form-floating mb-3">
-                                            <input asp-for="NomeCompleto" class="form-control" placeholder="Nome completo" />
-                                            <label asp-for="NomeCompleto"></label>
-                                            <span asp-validation-for="NomeCompleto" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input asp-for="CPF" class="form-control" placeholder="CPF" />
-                                            <label asp-for="CPF"></label>
-                                            <span asp-validation-for="CPF" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input id="NomeCidadeAutoCompletar" name="NomeCidade" class="form-control" placeholder="Cidade" />
-                                            <label asp-for="Cidade"></label>
-                                            <span asp-validation-for="Cidade" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input asp-for="Senha" class="form-control" placeholder="Senha" />
-                                            <label asp-for="Senha"></label>
-                                            <span asp-validation-for="Senha" class="text-danger"></span>
-                                        </div>
-                                        <div class="mt-4 mb-0">
-                                            <div class="d-grid"><button type="submit" class="btn btn-primary btn-block">Cadastrar</button></div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="card-footer text-center py-3">
-                                    <div class="small"><a asp-controller="Usuario" asp-action="Login">Já cadastrado? Va para o login</a></div>
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-4">Cadastrar</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-controller="Usuario" asp-action="Cadastrar">
+                            <div class="form-floating mb-3">
+                                <input asp-for="NomeCompleto" class="form-control" placeholder="Nome completo" />
+                                <label asp-for="NomeCompleto"></label>
+                                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="CPF" class="form-control" placeholder="CPF" />
+                                <label asp-for="CPF"></label>
+                                <span asp-validation-for="CPF" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Senha" class="form-control" placeholder="Senha" />
+                                <label asp-for="Senha"></label>
+                                <span asp-validation-for="Senha" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input name="CidadeResidenciaID" class="cidadeResidenciaID" type="hidden">
+                                <input class="form-control nomeCidadeAutoCompletar" placeholder="Cidade de residência" />
+                                <label asp-for="CidadeResidenciaID"></label>
+                                <span asp-validation-for="CidadeResidenciaID" class="text-danger"></span>
+                            </div>
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <div class="small">
+                            <a asp-controller="Usuario" asp-action="Login">Já possui uma conta? Fazer login</a>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
-    <div id="layoutAuthentication_footer">
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Minha Bahia 2022</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-</div>
+</main>

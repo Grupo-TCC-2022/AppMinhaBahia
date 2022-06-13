@@ -1,0 +1,43 @@
+@model ICollection<AppMinhaBahia.Models.Prefeito>
+
+@{
+    Layout = "_LayoutGovernador";
+    ViewData["Title"] = "Prefeitos";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Prefeitos</h1>
+        <div class="card mb-4">
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th>Nome completo</th>
+                            <th>CPF</th>
+                            <th>Cidade de residência</th>
+                            <th>Cidade de governo</th>
+                            <th>Verba</th>
+                            <th>Requisições</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var prefeito in Model)
+                        {
+                            <tr>
+                                <td>@prefeito.NomeCompleto</td>
+                                <td>@prefeito.CPF</td>
+                                <td>@prefeito.CidadeResidencia.Nome</td>
+                                <td>@prefeito.CidadeGoverno.Nome</td>
+                                <td>@prefeito.CidadeGoverno.Verba</td>
+                                <td>@prefeito.QuantidadeRequisicoes</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

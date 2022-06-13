@@ -1,0 +1,63 @@
+@model AppMinhaBahia.Models.Requisicao
+
+@{
+    if (ViewBag.Cargo == 'G')
+    {
+        Layout = "_LayoutGovernador";
+    }
+    // TODO: outros layouts
+    ViewData["Title"] = "Detalhes";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1>Detalhes</h1>
+
+        <div>
+            <h4>@ViewBag.CidadeRequisicao</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Tipo
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Tipo)
+                </dd>
+                <dt class="col-sm-2">
+                    Descrição
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+                <dt class="col-sm-2">
+                    Verba
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Verba)
+                </dd>
+                <dt class="col-sm-2">
+                    Data da requisição
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DataDeCriacao)
+                </dd>
+                <dt class="col-sm-2">
+                    Status
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+            </dl>
+        </div>
+        @if (Model.Status == StatusRequisicao.analise)
+        {
+            <div>
+                <a asp-controller="Requisicao" asp-action="Aprovar" asp-route-requisicaoid="@Model.RequisicaoID"
+                    class="btn btn-success">Aprovar</a>
+
+                <a asp-controller="Requisicao" asp-action="Reprovar" asp-route-requisicaoid="@Model.RequisicaoID"
+                    class="btn btn-danger">Reprovar</a>
+            </div>
+        }
+    </div>
+</main>

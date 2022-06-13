@@ -2,26 +2,72 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-// Completar o autocomplete de cidade
+
 $(document).ready(function () {
+    // Funcao de autocomplete de campo de Cidades
     $(function () {
         $.ajax({
             url: '/Cidade/GetCidades'
-        }).done(function (data) {
-            listaNomeCidade = [];
-            for (var i = 0, len = data.length; i < len; i++){
-                listaNomeCidade.push(data[i].nome);
+        }).done(function (cidades) {
+            listaNomeValorCidade = [];
+            for (var i = 0, len = cidades.length; i < len; i++){
+
+                listaNomeValorCidade.push(
+                    {
+                    "label": cidades[i].nome,
+                    "value": cidades[i].instituicaoID
+                    }
+                );
             }
-            let nomeCidadeAutoCompletar = $('#NomeCidadeAutoCompletar');
+
+            let nomeCidadeAutoCompletar = $('.nomeCidadeAutoCompletar');
+            let inputNumericoDeIdCidade = $('.cidadeResidenciaID');
 
             if (nomeCidadeAutoCompletar != null){
                 nomeCidadeAutoCompletar.autocomplete({
-                    source: listaNomeCidade,
-                    minLenght: 3
-                })
+                    source: listaNomeValorCidade,
+                    minLenght: 3,
+                    select: function (event, ui){
+                        event.preventDefault();
+                        var selectedObj = ui.item;
+                        inputNumericoDeIdCidade.val(selectedObj.value);
+                        nomeCidadeAutoCompletar.val(selectedObj.label);  
+                    },
+                    focus: function (event, ui){
+                        event.preventDefault();
+                        var selectedObj = ui.item;
+                        inputNumericoDeIdCidade.val(selectedObj.value);
+                        nomeCidadeAutoCompletar.val(selectedObj.label);  
+                    }
+                });
+            }
+            
+            let nomeCidadeGovernoAutoCompletar = $('.nomeCidadeGovernoAutoCompletar');
+            let inputNumericoDeIdCidadeGoverno = $(".cidadeGovernoID");
+
+            if (nomeCidadeGovernoAutoCompletar != null){
+                nomeCidadeGovernoAutoCompletar.autocomplete({
+                    source: listaNomeValorCidade,
+                    minLenght: 3,
+                    select: function (event, ui){
+                        event.preventDefault();
+                        var selectedObj = ui.item;
+                        inputNumericoDeIdCidadeGoverno.val(selectedObj.value);
+                        nomeCidadeGovernoAutoCompletar.val(selectedObj.label);  
+                    },
+                    focus: function (event, ui){
+                        event.preventDefault();
+                        var selectedObj = ui.item;
+                        inputNumericoDeIdCidadeGoverno.val(selectedObj.value);
+                        nomeCidadeGovernoAutoCompletar.val(selectedObj.label);  
+                    }
+                });
             }
         });
     });
 
-    $('#tabela').DataTable();
+    let tabela = $('#table');
+    if (tabela) {
+        tabela.DataTable();
+    }
 });

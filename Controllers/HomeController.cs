@@ -1,71 +1,63 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using AppMinhaBahia.Models;
 using AppMinhaBahia.Data;
-using System;
+using AppMinhaBahia.Interfaces;
+using AppMinhaBahia.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace AppMinhaBahia.Controllers
+namespace AppMinhaBahia.Controllers;
+
+/* O proposito deste controller nesta aplicacao nao vai ser o de retornar, 
+mas o de redirecionar o Usuario para sua determinada View dependendo 
+do cargo do Usuario */
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    /* Este repositorio generico vai ser do tipo Usuario */ 
+    private readonly IRepositorioGenerico<Usuario> repositorio;
+    /* Pegar o contexto do banco como parametro e repassar ele para o 
+    repositorio generico em vez de fazer uso dele diretamente */ 
+    public HomeController(MinhaBahiaContext context)
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly UsuarioRepositorio _usuarioRepositorio;
-        private readonly PrefeituraRepositorio _prefeituraRepositorio;
-        private readonly UFAdminRepositorio _adminRepositorio;
-        private readonly FuncionarioRepositorio _funcionarioRepositorio;
+        repositorio = new RepositorioGenerico<Usuario>(context);
+    }
 
-        public HomeController(ILogger<HomeController> logger, UsuarioRepositorio usuarioRepositorio, PrefeituraRepositorio prefeituraRepositorio, UFAdminRepositorio adminRepositorio, FuncionarioRepositorio funcionarioRepositorio)
+    public IActionResult Index()
+    {
+        if (User.Identity.IsAuthenticated)
         {
-            _logger = logger;
-            _usuarioRepositorio = usuarioRepositorio;
-            _prefeituraRepositorio = prefeituraRepositorio;
-            _adminRepositorio = adminRepositorio;
-            _funcionarioRepositorio = funcionarioRepositorio;
+            /* Pegar o id do usuario logado */
+            int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
+            /* Pesquisar no repositorio este usuario pelo ID */
+            var usuarioLogado = repositorio.RetornarPorId(usuarioID);
+            /* O trabalho de redirecionar eh feito pela funcao chamada */
+            return RedirecionarUsuario(usuarioLogado);
+        }
+        /* Redirecione o usuario para a view de cadastro caso nao esteja 
+        niguem logado */
+        return RedirectToAction("Index", "Usuario");
+    }
+
+    /* Funcao que tem como objetivo redirecionar o Usuario logado cada 
+    qual para sua View especifica, o Governador vai para sua view onde 
+    ele pode cadastrar e editar Prefeitos, os Prefeitos vao para sua 
+    View onde podem trabalhar com os setores e assim adiante... */
+    public RedirectToActionResult RedirecionarUsuario(Usuario usuario)
+    {
+        if (usuario is Governador)
+        {
+            return RedirectToAction("Index", "Governador");
+        }
+        else if (usuario is Prefeito)
+        {
+            return RedirectToAction("Index", "Prefeito");
+        }
+        else if (usuario is Secretario)
+        {
+            return RedirectToAction("Index", "Prefeito");
+        }
+        else if (usuario is Funcionario)
+        {
+            return RedirectToAction("Index", "Funcionario");
         }
 
-        public IActionResult Index()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                string tipoUsuario = User.FindFirst("tipo").Value;
-                int usuarioId = Int32.Parse(User.FindFirst("id").Value);
-                Usuario usuario =  new Usuario();
-
-                if (tipoUsuario == "comum")
-                {
-                    usuario = _usuarioRepositorio.BuscarUsuarioPorId(usuarioId);
-                }
-                else if (tipoUsuario == "prefeitura")
-                {
-                    usuario = _prefeituraRepositorio.BuscarPrefeituraPorId(usuarioId);
-                } 
-                else if (tipoUsuario == "admin")
-                {
-                    usuario = _adminRepositorio.BuscarUFAdminPorId(usuarioId);
-                }
-                else if (tipoUsuario == "funcionario")
-                {
-                    usuario = _funcionarioRepositorio.BuscarFuncionarioPorId(usuarioId);
-                }
-
-                return View(usuario);
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        return RedirectToAction("Index", "Usuario");
     }
 }

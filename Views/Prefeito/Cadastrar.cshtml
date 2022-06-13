@@ -1,0 +1,57 @@
+@model AppMinhaBahia.Models.Prefeito
+
+@{
+    Layout = "_LayoutGovernador";
+    ViewData["Title"] = "Cadastrar";
+}
+
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-4">Cadastrar prefeito</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-controller="Prefeito" asp-action="Cadastrar">
+                            <div class="form-floating mb-3">
+                                <input asp-for="NomeCompleto" class="form-control" placeholder="Nome completo" />
+                                <label asp-for="NomeCompleto"></label>
+                                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="CPF" class="form-control" placeholder="CPF" />
+                                <label asp-for="CPF"></label>
+                                <span asp-validation-for="CPF" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Senha" class="form-control" placeholder="Senha" />
+                                <label asp-for="Senha"></label>
+                                <span asp-validation-for="Senha" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input name="CidadeResidenciaID" class="cidadeResidenciaID" type="hidden">
+                                <input class="form-control nomeCidadeAutoCompletar" placeholder="Cidade de residência" />
+                                <label asp-for="CidadeResidenciaID"></label>
+                                <span asp-validation-for="CidadeResidenciaID" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input name="CidadeGovernoID" class="cidadeGovernoID"
+                                type="hidden">
+                                <input class="form-control nomeCidadeGovernoAutoCompletar" placeholder="Cidade de governo" />
+                                <label asp-for="CidadeGovernoID"></label>
+                                <span asp-validation-for="CidadeGovernoID" class="text-danger"></span>
+                            </div>
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

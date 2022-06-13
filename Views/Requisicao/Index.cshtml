@@ -1,0 +1,49 @@
+@model ICollection<AppMinhaBahia.Models.Requisicao>
+
+@{
+    if (ViewBag.Cargo == 'G')
+    {
+        Layout = "_LayoutGovernador";
+    }
+    // TODO: outros layouts
+    ViewData["Title"] = "Requisições";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Requisições</h1>
+        <div class="card mb-4">
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Verba</th>
+                            <th>Data da requisição</th>
+                            <th>Status</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var requisicao in Model)
+                        {
+                            <tr>
+                                <td>@requisicao.Tipo</td>
+                                <td>@requisicao.Verba</td>
+                                <td>@requisicao.DataDeCriacao</td>
+                                <td>@requisicao.Status</td>
+                                <td><a 
+                                asp-controller="Requisicao" 
+                                asp-action="Detalhes" 
+                                asp-route-requisicaoid="@requisicao.RequisicaoID" 
+                                class="btn btn-primary">Detalhes</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
