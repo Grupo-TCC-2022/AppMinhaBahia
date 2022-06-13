@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppMinhaBahia.Migrations
 {
     [DbContext(typeof(MinhaBahiaContext))]
-    [Migration("20220613231358_PrimeiraMigration")]
+    [Migration("20220613233421_PrimeiraMigration")]
     partial class PrimeiraMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
