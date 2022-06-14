@@ -27,7 +27,6 @@
                             <th>Verba</th>
                             <th>Data da requisição</th>
                             <th>Status</th>
-                            <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,11 +37,6 @@
                                 <td>@requisicao.Verba</td>
                                 <td>@requisicao.DataDeCriacao</td>
                                 <td>@requisicao.Status</td>
-                                <td><a 
-                                asp-controller="Requisicao" 
-                                asp-action="Detalhes" 
-                                asp-route-requisicaoid="@requisicao.RequisicaoID" 
-                                class="btn btn-primary">Detalhes</a></td>
                             </tr>
                         }
                     </tbody>

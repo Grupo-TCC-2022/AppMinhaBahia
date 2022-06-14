@@ -21,8 +21,14 @@
                         <form method="post" asp-controller="Requisicao" asp-action="Criar">
                             <div class="form-floating mb-3">
                                 <select name="Tipo" class="form-control">
-                                    <option value="0">Verba</option>
-                                    <option value="1">Ocorrência</option>
+                                    @if (ViewBag.Cargo == 'P')
+                                    {
+                                        <option value="0">Verba</option>
+                                    }
+                                    else if (ViewBag.Cargo == 'U')
+                                    {
+                                        <option value="1">Ocorrência</option>
+                                    }
                                 </select>
                             </div>
                             <div class="form-floating mb-3">

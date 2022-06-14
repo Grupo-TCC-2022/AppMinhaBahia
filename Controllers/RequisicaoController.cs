@@ -106,7 +106,6 @@ public class RequisicaoController : Controller
         {
             ViewBag.Cargo = 'U';
         }
-        // TODO: outros cargos
 
         return View(requisicao);
     }
