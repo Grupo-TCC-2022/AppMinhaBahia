@@ -85,7 +85,11 @@ public class RequisicaoController : Controller
             return NotFound();
         }
 
-        var requisicao = repositorio.RetornarPorId((int) requisicaoid);
+        var requisicao = repositorio
+        .RetornarTabela()
+        .Include(r => r.Instituicao)
+        .FirstOrDefault(r => r.RequisicaoID == requisicaoid);
+        
         if (requisicao == null)
         {
             return NotFound();
@@ -112,6 +116,7 @@ public class RequisicaoController : Controller
             ViewBag.Cargo = 'U';
         }
 
+        ViewBag.Verba = requisicao.Instituicao.Verba;
         return View(requisicao);
     }
 
