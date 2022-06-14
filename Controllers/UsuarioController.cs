@@ -126,4 +126,14 @@ public class UsuarioController : Controller
         }
         return RedirectToAction("Login", "Usuario");
     }
+
+    public async Task<IActionResult> Logout()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            await HttpContext.SignOutAsync();
+        }
+
+        return RedirectToAction("Index", "Home");
+    }
 }
