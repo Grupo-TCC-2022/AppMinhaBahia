@@ -12,12 +12,10 @@ public class MinhaBahiaContext : DbContext
     quando o metodo "SaveChangesAsync()" for chamado */
     public DbSet<Cidade> Cidades { get; set; }
     public DbSet<Estado> Estados { get; set; }
-    public DbSet<Setor> Setores { get; set; }
-    public DbSet<Funcionario> Funcionarios { get; set; }
     public DbSet<Governador> Governadores { get; set; }
     public DbSet<Prefeito> Prefeitos { get; set; }
-    public DbSet<Secretario> Secretarios { get; set; }
     public DbSet<Requisicao> Requisicoes { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

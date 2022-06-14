@@ -49,14 +49,6 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index", "Prefeito");
         }
-        else if (usuario is Secretario)
-        {
-            return RedirectToAction("Index", "Prefeito");
-        }
-        else if (usuario is Funcionario)
-        {
-            return RedirectToAction("Index", "Funcionario");
-        }
 
         return RedirectToAction("Index", "Usuario");
     }

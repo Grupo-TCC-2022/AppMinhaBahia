@@ -64,15 +64,6 @@ public class RequisicaoController : Controller
             && r.Instituicao.LiderID == usuarioLogado.UsuarioID 
             && r.Tipo == TipoRequisicao.ocorrencia);
         }
-        else if (usuarioLogado is Secretario)
-        {
-            ViewBag.Cargo = 'S';
-            requisicoes = requisicoes
-            .Where(r => 
-            r.Instituicao is Setor 
-            && r.Instituicao.LiderID == usuarioLogado.UsuarioID 
-            && r.Tipo == TipoRequisicao.ocorrencia);
-        }
         else
         {
             ViewBag.Cargo = 'U';
@@ -110,10 +101,6 @@ public class RequisicaoController : Controller
         else if (usuarioLogado is Prefeito)
         {
             ViewBag.Cargo = 'P';
-        }
-        else if (usuarioLogado is Secretario)
-        {
-            ViewBag.Cargo = 'S';
         }
         else
         {
@@ -174,10 +161,6 @@ public class RequisicaoController : Controller
         else if (usuarioLogado is Prefeito)
         {
             ViewBag.Cargo = 'P';
-        }
-        else if (usuarioLogado is Secretario)
-        {
-            ViewBag.Cargo = 'S';
         }
         else
         {

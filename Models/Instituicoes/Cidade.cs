@@ -16,9 +16,6 @@ public class Cidade : Instituicao
     public int EstadoID { get; set; }
     public Estado Estado { get; set; }
 
-    /*______________CIDADE_TEM_MUITOS_SETORES______________*/
-    public ICollection<Setor> Setores { get; set; }
-
     /*______________CIDADE_TEM_MUITOS_RESIDENTES______________*/
     public ICollection<Usuario> Residentes { get; set; }
 }
