@@ -5,6 +5,7 @@ using AppMinhaBahia.Interfaces;
 using AppMinhaBahia.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppMinhaBahia.Controllers;
 
@@ -135,5 +136,53 @@ public class UsuarioController : Controller
         }
 
         return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost]
+    public IActionResult CidadeResidencia(int? CidadeResidenciaID)
+    {
+        if (CidadeResidenciaID == null)
+        {
+            ViewBag.Erro = "Cidade invalida";
+            return View();
+        }
+
+        /* Pegar o id do usuario logado */
+        int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
+        /* Pesquisar no repositorio este usuario pelo ID */
+        var usuarioLogado = repositorio.RetornarPorId(usuarioID);
+
+        usuarioLogado.CidadeResidenciaID = (int) CidadeResidenciaID;
+        repositorio.Salvar();
+
+        return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult CidadeResidencia()
+    {
+        /* Pegar o id do usuario logado */
+        int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
+        /* Pesquisar no repositorio este usuario pelo ID */
+        var usuarioLogado = repositorio
+        .RetornarTabela()
+        .Include(u => u.CidadeResidencia)
+        .FirstOrDefault(u => u.UsuarioID == usuarioID);
+
+        if (usuarioLogado is Governador)
+        {
+            ViewBag.Cargo = 'G';
+        }
+        else if (usuarioLogado is Prefeito)
+        {
+            ViewBag.Cargo = 'P';
+        }
+        else
+        {
+            ViewBag.Cargo = 'U';
+        }
+
+        ViewBag.CidadeResidencia = usuarioLogado.CidadeResidencia;
+
+        return View(usuarioLogado);
     }
 }
