@@ -161,7 +161,7 @@ public class RequisicaoController : Controller
             }
             else
             {
-                return BadRequest(); // TODO: Erro personalizado
+                return RedirectToAction("Index", "Erro", new {mensagem = "Verba da requisição excede a verba estadual"});
             }
 
             return RedirectToAction("Index", "Home");
@@ -170,7 +170,7 @@ public class RequisicaoController : Controller
         {
             if (custo == null)
             {
-                return BadRequest(); // TODO: Erro personalizado
+                return RedirectToAction("Index", "Erro", new {mensagem = "Para intervir uma ocorrência é necessário definir um custo"});
             }
 
             var prefeito_requisicao = repositorio_prefeito
@@ -186,7 +186,7 @@ public class RequisicaoController : Controller
             }
             else
             {
-                return BadRequest(); // TODO: Erro personalizado
+                return RedirectToAction("Index", "Erro", new {mensagem = "Verba da requisição excede a verba municipal"});
             }
 
             return RedirectToAction("Index", "Home");

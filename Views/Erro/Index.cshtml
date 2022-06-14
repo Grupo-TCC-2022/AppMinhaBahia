@@ -1,0 +1,22 @@
+@{
+    if (ViewBag.Cargo == 'G')
+    {
+        Layout = "_LayoutGovernador";
+    }
+    else if (ViewBag.Cargo == 'P')
+    {
+        Layout = "_LayoutPrefeito";
+    }
+    else
+    {
+        Layout = "_LayoutComum";
+    }
+
+    ViewData["Title"] = "Erro";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">@ViewBag.MensagemErro</h1>
+    </div>
+</main>
