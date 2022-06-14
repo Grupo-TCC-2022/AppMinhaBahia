@@ -6115,7 +6115,7 @@ namespace AppMinhaBahia.Migrations
                             InstituicaoID = 1,
                             LiderID = 1,
                             Nome = "Bahia",
-                            Verba = 1.7976931348623157E+308
+                            Verba = 1000000000.0
                         });
                 });
 

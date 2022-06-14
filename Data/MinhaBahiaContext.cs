@@ -25,7 +25,7 @@ public class MinhaBahiaContext : DbContext
             {
                 InstituicaoID = 1,
                 Nome = "Bahia",
-                Verba = Double.MaxValue - 1,
+                Verba = 1000000000,
                 LiderID = 1
             }
         );

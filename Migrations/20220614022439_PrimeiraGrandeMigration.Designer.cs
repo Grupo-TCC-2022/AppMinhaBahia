@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppMinhaBahia.Migrations
 {
     [DbContext(typeof(MinhaBahiaContext))]
-    [Migration("20220614002635_PrimeiraMigration")]
-    partial class PrimeiraMigration
+    [Migration("20220614022439_PrimeiraGrandeMigration")]
+    partial class PrimeiraGrandeMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -6117,7 +6117,7 @@ namespace AppMinhaBahia.Migrations
                             InstituicaoID = 1,
                             LiderID = 1,
                             Nome = "Bahia",
-                            Verba = 1.7976931348623157E+308
+                            Verba = 1000000000.0
                         });
                 });
 

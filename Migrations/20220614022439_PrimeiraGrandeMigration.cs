@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AppMinhaBahia.Migrations
 {
-    public partial class PrimeiraMigration : Migration
+    public partial class PrimeiraGrandeMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -1049,7 +1049,7 @@ namespace AppMinhaBahia.Migrations
                     { 853, null, "Xique-Xique", 1000000.0 },
                     { 854, null, "Copixaba", 1000000.0 },
                     { 855, null, "Iguira", 1000000.0 },
-                    { 1, 1, "Bahia", 1.7976931348623157E+308 }
+                    { 1, 1, "Bahia", 1000000000.0 }
                 });
 
             migrationBuilder.InsertData(

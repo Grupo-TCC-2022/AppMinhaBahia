@@ -65,7 +65,7 @@ public class PrefeitoController : Controller
             cidade.LiderID = novoPrefeito.UsuarioID;
             repositorio.Salvar();
             // Redirecionar para index de prefeitos
-            return RedirectToAction("Index", "Prefeito");
+            return RedirectToAction("Index", "Home");
         }
         return View(novoPrefeito);
     }
