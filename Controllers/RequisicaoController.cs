@@ -67,6 +67,11 @@ public class RequisicaoController : Controller
         else
         {
             ViewBag.Cargo = 'U';
+            requisicoes = requisicoes
+            .Where(r => 
+            r.Instituicao is Cidade 
+            && r.Instituicao.InstituicaoID == usuarioLogado.CidadeResidenciaID 
+            && r.Tipo == TipoRequisicao.ocorrencia);
         }
 
         return View(requisicoes.ToList());
@@ -213,7 +218,10 @@ public class RequisicaoController : Controller
         {
             ViewBag.Cargo = 'P';
         }
-        // TODO: Outros usuarios
+        else
+        {
+            ViewBag.Cargo = 'U';
+        }
 
         return View();
     }
@@ -230,13 +238,19 @@ public class RequisicaoController : Controller
         /* Pegar o id do usuario logado */
         int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
         /* Pesquisar no repositorio este usuario pelo ID */
-        var usuarioLogado = repositorio_usuario.RetornarPorId(usuarioID);
+        var usuarioLogado = repositorio_usuario
+        .RetornarTabela()
+        .Include(u => u.CidadeResidencia)
+        .FirstOrDefault(u => u.UsuarioID == usuarioID);
 
         if (usuarioLogado is Prefeito)
         {
             ViewBag.Cargo = 'P';
         }
-        // TODO: Outros usuarios
+        else
+        {
+            ViewBag.Cargo = 'U';
+        }
 
         if (ModelState.IsValid)
         {
@@ -255,10 +269,20 @@ public class RequisicaoController : Controller
 
                 repositorio.Cadastrar(requisicao);
                 repositorio.Salvar();
-                return RedirectToAction("Index", "Prefeito");
+                return RedirectToAction("Index", "Home");
             }
-            // TODO: Outros usuarios
-            return NotFound();
+            else
+            {
+                requisicao.Usuario = usuarioLogado;
+                requisicao.UsuarioID = usuarioLogado.UsuarioID;
+
+                requisicao.Instituicao = usuarioLogado.CidadeResidencia;
+                requisicao.InstituicaoID = usuarioLogado.CidadeResidenciaID;
+
+                repositorio.Cadastrar(requisicao);
+                repositorio.Salvar();
+                return RedirectToAction("Index", "Home");
+            }
         }
         
         return View(requisicao);

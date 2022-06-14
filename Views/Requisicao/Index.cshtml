@@ -5,7 +5,14 @@
     {
         Layout = "_LayoutGovernador";
     }
-    // TODO: outros layouts
+    else if (ViewBag.Cargo == 'P')
+    {
+        Layout = "_LayoutPrefeito";
+    }
+    else
+    {
+        Layout = "_LayoutComum";
+    }
     ViewData["Title"] = "Requisições";
 }
 

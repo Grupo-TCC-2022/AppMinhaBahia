@@ -1,23 +1,73 @@
-@{
-    Layout = "_LayoutAutenticacao";
-    ViewData["Title"] = "Não logado";
-}
+@if (User.Identity.IsAuthenticated)
+{
+    Layout = "_LayoutComum";
+    ViewData["Title"] = "Página inicial";
 
-<main>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                    <div class="card-header">
-                        <h3 class="text-center font-weight-light my-4">Faça login para continuar</h3>
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Requisições da cidade</h1>
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">Em analise</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" 
+                            asp-controller="Requisicao"
+                            asp-action="Index"
+                            asp-route-status="analise">Ver detalhes</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <a class="btn btn-primary btn-block" asp-controller="Usuario"
-                        asp-action="Cadastrar">Cadastrar</a>
-                        <a class="btn btn-primary btn-block" asp-controller="Usuario" asp-action="Login">Login</a>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">Aprovadas</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" 
+                            asp-controller="Requisicao"
+                            asp-action="Index"
+                            asp-route-status="aprovada">Ver detalhes</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-danger text-white mb-4">
+                        <div class="card-body">Reprovadas</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" 
+                            asp-controller="Requisicao"
+                            asp-action="Index"
+                            asp-route-status="reprovada">Ver detalhes</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+        </main>
+}
+else
+{
+    Layout = "_LayoutAutenticacao";
+    ViewData["Title"] = "Não logado";
+
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light my-4">Faça login para continuar</h3>
+                        </div>
+                        <div class="card-body">
+                            <a class="btn btn-primary btn-block" asp-controller="Usuario"
+                            asp-action="Cadastrar">Cadastrar</a>
+                            <a class="btn btn-primary btn-block" asp-controller="Usuario" asp-action="Login">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+}

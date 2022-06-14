@@ -5,7 +5,10 @@
     {
         Layout = "_LayoutPrefeito";
     }
-    <!-- TODO: Outros cargos -->
+    else
+    {
+        Layout = "_LayoutComum";
+    }
     ViewData["Title"] = "Cadastrar";
 }
 
@@ -37,11 +40,14 @@
                                 <label asp-for="Descricao"></label>
                                 <span asp-validation-for="Descricao" class="text-danger"></span>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input asp-for="Verba" class="form-control" placeholder="Verba" />
-                                <label asp-for="Verba"></label>
-                                <span asp-validation-for="Verba" class="text-danger"></span>
-                            </div>
+                            @if (ViewBag.Cargo == 'P')
+                            {
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Verba" class="form-control" placeholder="Verba" />
+                                    <label asp-for="Verba"></label>
+                                    <span asp-validation-for="Verba" class="text-danger"></span>
+                                </div>
+                            }
                             <div class="mt-4 mb-0">
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary btn-block">Criar</button>
