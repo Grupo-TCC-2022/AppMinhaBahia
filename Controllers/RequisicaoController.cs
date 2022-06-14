@@ -258,4 +258,31 @@ public class RequisicaoController : Controller
 
         return RedirectToAction("Criar", "Requisicao");
     }
+
+    public IActionResult ListarMinhas()
+    {
+        /* Pegar o id do usuario logado */
+        int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
+        /* Pesquisar no repositorio este usuario pelo ID */
+        var usuarioLogado = repositorio_usuario.RetornarPorId(usuarioID);
+
+        if (usuarioLogado is Governador)
+        {
+            ViewBag.Cargo = 'G';
+        }
+        else if (usuarioLogado is Prefeito)
+        {
+            ViewBag.Cargo = 'P';
+        }
+        else
+        {
+            ViewBag.Cargo = 'U';
+        }
+
+        var requisicoes = repositorio.RetornarTabela()
+        .Where(r => r.UsuarioID == usuarioID)
+        .ToList();
+
+        return View(requisicoes);
+    }
 }
