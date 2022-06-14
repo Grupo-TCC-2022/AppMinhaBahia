@@ -120,8 +120,7 @@ public class RequisicaoController : Controller
         return View(requisicao);
     }
 
-    [Route("Requisicao/Aprovar/{requisicaoid}")]
-    public IActionResult Aprovar(int? requisicaoid)
+    public IActionResult Aprovar(int? requisicaoid, double? custo)
     {
         if (requisicaoid == null)
         {
@@ -165,19 +164,35 @@ public class RequisicaoController : Controller
                 return BadRequest(); // TODO: Erro personalizado
             }
 
-            return RedirectToAction("Index", "Governador");
+            return RedirectToAction("Index", "Home");
         }
         else if (usuarioLogado is Prefeito)
         {
-            ViewBag.Cargo = 'P';
-        }
-        else
-        {
-            ViewBag.Cargo = 'U';
-        }
-        // TODO: outros cargos, outros tipos requisicoes
+            if (custo == null)
+            {
+                return BadRequest(); // TODO: Erro personalizado
+            }
 
-        return NotFound();
+            var prefeito_requisicao = repositorio_prefeito
+            .RetornarTabela()
+            .Include(p => p.CidadeGoverno)
+            .FirstOrDefault(p => p.UsuarioID == usuarioLogado.UsuarioID);
+
+            if (custo <= prefeito_requisicao.CidadeGoverno.Verba)
+            {
+                prefeito_requisicao.CidadeGoverno.Verba -= (double) custo;
+                requisicao.Status = StatusRequisicao.aprovada;
+                repositorio.Salvar();
+            }
+            else
+            {
+                return BadRequest(); // TODO: Erro personalizado
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        return Unauthorized();
     }
 
     [Route("Requisicao/Reprovar/{requisicaoid}")]

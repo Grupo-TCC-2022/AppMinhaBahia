@@ -63,13 +63,37 @@
         @if (Model.Status == StatusRequisicao.analise && 
         (ViewBag.Cargo == 'G' || ViewBag.Cargo == 'P'))
         {
-            <div>
-                <a asp-controller="Requisicao" asp-action="Aprovar" asp-route-requisicaoid="@Model.RequisicaoID"
-                    class="btn btn-success">Aprovar</a>
-
+            @if (ViewBag.Cargo == 'P')
+            {
+                <form method="get" asp-controller="Requisicao" asp-action="Aprovar" style="display: inline-block;">
+                    <input name="requisicaoid" type="hidden" value="@Model.RequisicaoID">
+                    <div class="form-floating mt-2 mb-2" style="display: inline-block;">
+                        <input style="width: 200px;" type="number" name="custo" class="form-control" placeholder="Definir custo" id="custo"/>
+                        <label for="custo">Definir custo</label>
+                        <span for="custo" class="text-danger">
+                            @if (ViewBag.Erro != null)
+                            {
+                                @ViewBag.Erro;
+                            }
+                        </span>
+                    </div>
+                    <div style="display: inline-block;">
+                        <button type="submit" class="btn btn-success">Intervir</button>
+                    </div>
+                </form>
                 <a asp-controller="Requisicao" asp-action="Reprovar" asp-route-requisicaoid="@Model.RequisicaoID"
-                    class="btn btn-danger">Reprovar</a>
-            </div>
+                        class="btn btn-danger">Reprovar</a>
+            }
+            else if (ViewBag.Cargo == 'G')
+            {
+                <div>
+                    <a asp-controller="Requisicao" asp-action="Aprovar" asp-route-requisicaoid="@Model.RequisicaoID"
+                        class="btn btn-success">Aprovar</a>
+
+                    <a asp-controller="Requisicao" asp-action="Reprovar" asp-route-requisicaoid="@Model.RequisicaoID"
+                        class="btn btn-danger">Reprovar</a>
+                </div>
+            }
         }
     </div>
 </main>
