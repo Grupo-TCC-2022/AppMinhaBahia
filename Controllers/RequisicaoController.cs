@@ -227,13 +227,19 @@ public class RequisicaoController : Controller
             ModelState.AddModelError("Verba", "Para o tipo requisição uma verba é necessária");
         }
 
+        /* Pegar o id do usuario logado */
+        int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
+        /* Pesquisar no repositorio este usuario pelo ID */
+        var usuarioLogado = repositorio_usuario.RetornarPorId(usuarioID);
+
+        if (usuarioLogado is Prefeito)
+        {
+            ViewBag.Cargo = 'P';
+        }
+        // TODO: Outros usuarios
+
         if (ModelState.IsValid)
         {
-             /* Pegar o id do usuario logado */
-            int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
-            /* Pesquisar no repositorio este usuario pelo ID */
-            var usuarioLogado = repositorio_usuario.RetornarPorId(usuarioID);
-
             if (usuarioLogado is Prefeito)
             {
                 requisicao.Usuario = usuarioLogado;
@@ -254,8 +260,8 @@ public class RequisicaoController : Controller
             // TODO: Outros usuarios
             return NotFound();
         }
-
-        return RedirectToAction("Criar", "Requisicao");
+        
+        return View(requisicao);
     }
 
     public IActionResult ListarMinhas()
