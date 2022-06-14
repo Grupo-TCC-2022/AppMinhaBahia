@@ -1,0 +1,54 @@
+@model AppMinhaBahia.Models.Usuario
+
+@{
+    if (ViewBag.Cargo == 'G')
+    {
+        Layout = "_LayoutGovernador";
+    }
+    else if (ViewBag.Cargo == 'P')
+    {
+        Layout = "_LayoutPrefeito";
+    }
+    else
+    {
+        Layout = "_LayoutComum";
+    }
+
+    ViewData["Title"] = "Senha";
+}
+
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-4">Mudar senha</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" 
+                        asp-controller="Usuario" 
+                        asp-action="Senha">
+                            <div class="form-floating mb-3">
+                                <input name="Senha" type="password" class="form-control" value="@ViewBag.Senha" 
+                                placeholder="Nova senha">
+                                <label asp-for="CidadeResidenciaID"></label>
+                                <span asp-validation-for="Senha" class="text-danger">
+                                    @if (ViewBag.Erro != null)
+                                    {
+                                        @ViewBag.Erro;
+                                    }
+                                </span>
+                            </div>
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

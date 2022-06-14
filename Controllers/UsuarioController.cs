@@ -185,4 +185,63 @@ public class UsuarioController : Controller
 
         return View(usuarioLogado);
     }
+
+    [HttpPost]
+    public IActionResult Senha(string Senha)
+    {
+        if (Senha == null || Senha == "")
+        {
+            ViewBag.Erro = "Este campo é obrigatório";
+            return View();
+        }
+
+        if (Senha.Length < 3)
+        {
+            ViewBag.Erro = "Senha inválida, informe no mínimo 3 caracteres";
+            return View();
+        }
+
+        if (Senha.Length > 50)
+        {
+            ViewBag.Erro = "Senha excedeu o tamanho permitido";
+            return View();
+        }
+
+        /* Pegar o id do usuario logado */
+        int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
+        /* Pesquisar no repositorio este usuario pelo ID */
+        var usuarioLogado = repositorio.RetornarPorId(usuarioID);
+
+        usuarioLogado.Senha = Senha;
+        repositorio.Salvar();
+
+        return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult Senha()
+    {
+        /* Pegar o id do usuario logado */
+        int usuarioID = Int32.Parse(User.FindFirst("ID").Value);
+        /* Pesquisar no repositorio este usuario pelo ID */
+        var usuarioLogado = repositorio
+        .RetornarTabela()
+        .FirstOrDefault(u => u.UsuarioID == usuarioID);
+
+        if (usuarioLogado is Governador)
+        {
+            ViewBag.Cargo = 'G';
+        }
+        else if (usuarioLogado is Prefeito)
+        {
+            ViewBag.Cargo = 'P';
+        }
+        else
+        {
+            ViewBag.Cargo = 'U';
+        }
+
+        ViewBag.Senha = usuarioLogado.Senha;
+
+        return View(usuarioLogado);
+    }
 }
